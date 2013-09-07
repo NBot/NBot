@@ -4,6 +4,7 @@
     <MSBuild Projects="$(MSBuildProjectFile)" Targets="Build" BuildInParallel="true"  />
   </Target>
   <Target Name="DownloadDependencies" >
+    <MakeDir Directories="$(SolutionDir)packages" Condition="!Exists('$(SolutionDir)packages')" />
     <Exec Command="nuget install .\packages.config -o $(SolutionDir)packages" />
   </Target>
   <Target Name="BuildPackage" >

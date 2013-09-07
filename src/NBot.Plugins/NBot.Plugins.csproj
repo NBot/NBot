@@ -80,6 +80,7 @@
     <Compile Include="AsciiMe.cs" />
     <Compile Include="CalmDown.cs" />
     <Compile Include="DownForMe.cs" />
+    <Compile Include="ExcuseMe.cs" />
     <Compile Include="Help.cs" />
     <Compile Include="MemeGenerator.cs" />
     <Compile Include="Modules\PluginsModule.cs" />

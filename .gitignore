@@ -1,6 +1,10 @@
 # Build Folders (you can keep bin if you'd like, to store dlls and pdbs)
 [Bb]in/
 [Oo]bj/
+[Bb]uild/
+
+# No App Config
+app.config
 
 # mstest test results
 TestResults

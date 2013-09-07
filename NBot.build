@@ -1,0 +1,29 @@
+﻿<Project ToolsVersion="4.0"  xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Target Name="BuildSolution">
+    <CallTarget Targets="DownloadDependencies" />
+    <MSBuild Projects="$(MSBuildProjectFile)" Targets="Build" BuildInParallel="true"  />
+  </Target>
+  <Target Name="DownloadDependencies" >
+    <Exec Command="nuget install .\packages.config -o $(SolutionDir)packages" />
+  </Target>
+  <Target Name="BuildPackage" >
+    <MSBuild Projects=".\src\NBot.Core\NBot.Core.csproj;.\src\NBot.Campfire\NBot.Campfire.csproj;.\src\NBot.Plugins\NBot.Plugins.csproj" Targets="Rebuild" BuildInParallel="true"  />
+    <CallTarget Targets="CopyBuild" />
+    <!--<CallTarget Targets="CreatePackage"/>-->
+  </Target>
+  <Target Name="CopyBuild" >
+    <Message Text="Copying Artifacts" />
+    <ItemGroup>
+      <Core Include=".\**\NBot.Core.dll" />
+      <Campfire Include=".\**\NBot.Campfire.dll" />
+      <Plugins Include=".\**\NBot.Plugins.dll" />
+    </ItemGroup>
+    <Copy SourceFiles="@(Core)" DestinationFolder=".\Build\Core\lib\net45\" SkipUnchangedFiles="true" />
+    <Copy SourceFiles="@(Campfire)" DestinationFolder=".\Build\Campfire\lib\net45\" SkipUnchangedFiles="true" />
+    <Copy SourceFiles="@(Plugins)" DestinationFolder=".\Build\Plugins\lib\net45\" SkipUnchangedFiles="true" />
+    <Copy SourceFiles="@(Core);@(Campfire);@(Plugins)" DestinationFolder=".\Build\CampfireComboPack\lib\net45\" SkipUnchangedFiles="true" />
+  </Target>
+  <Target Name="CreatePackage"  >
+    <Exec Command="nuget pack .\build\NBot.Core.1.0.0.nuspec" />
+  </Target>
+</Project>

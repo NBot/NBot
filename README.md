@@ -32,5 +32,22 @@ Creating your first plugin.
 }
 ```
 
-## Quick Start
-Comming Soon....
+## Quick Start - Campfire Setup
+* Create a console aplication
+* Include NBot Core, Campfire and Plugins
+* Include Dependencies
+* Use the Fluent interface to configure your NBot
+* Chat Bot Bliss....
+```
+       static void Main(string[] args)
+        {
+            Core.NBot.Create("NBot") // The Name of you bot
+                .Register(b => b.RegisterModule(new PluginsModule())) // Load the Plugins Module
+               .UseCampfire("YOUR_AUTH_CODE", "YOUR_ACCOUNT_SUBDOMAIN", new[] { 12345 }.ToList())
+               .UseFileBrain() // Use the File Brain
+               .UseHandleBars() // Use Handlebars Brain Data Replacement
+               .AddSetting("AnnounceRooms", "*") // This is for the announce plugin
+               .Start(); // Get Crackin'
+        }
+```
+

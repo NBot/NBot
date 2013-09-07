@@ -1,0 +1,1 @@
+msbuild NBot.build /t:BuildPackage /p:Configuration=Release

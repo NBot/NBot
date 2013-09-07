@@ -69,6 +69,7 @@
     <Compile Include="Extensions\ObjectExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Help\Command.cs" />
+    <Compile Include="Help\Help.cs" />
     <Compile Include="Help\HelpAttribute.cs" />
     <Compile Include="Help\HelpInformation.cs" />
     <Compile Include="HostAdapter.cs" />

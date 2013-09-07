@@ -49,10 +49,11 @@ namespace NBot.Core
         private void InitalizeHost()
         {
             List<IRecieveMessages> messageRecievers = _container.Resolve<IEnumerable<IRecieveMessages>>().ToList();
-            InitalizeRouter(messageRecievers);
+
             InitalizeHelp(messageRecievers);
             InitalizeMessageFeeds();
             InitalizeMessageAdapters();
+            InitalizeRouter(messageRecievers);
         }
 
         private void InitalizeMessageAdapters()
@@ -81,7 +82,7 @@ namespace NBot.Core
             {
                 foreach (MethodInfo methodInfo in recieverType.GetMethods(BindingFlags.Public | BindingFlags.Instance))
                 {
-                    object[] helpAttributes = methodInfo.GetCustomAttributes(typeof (HelpAttribute), true);
+                    object[] helpAttributes = methodInfo.GetCustomAttributes(typeof(HelpAttribute), true);
 
                     if (!helpers.ContainsKey(recieverType.Name))
                     {

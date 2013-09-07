@@ -1,13 +1,11 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using NBot.Core;
-using NBot.Core.Help;
 using NBot.Core.Messaging;
 using NBot.Core.Messaging.Attributes;
 
-namespace NBot.Plugins
+namespace NBot.Core.Help
 {
     public class Help : RecieveMessages
     {

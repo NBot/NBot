@@ -81,7 +81,7 @@
     <Compile Include="CalmDown.cs" />
     <Compile Include="DownForMe.cs" />
     <Compile Include="ExcuseMe.cs" />
-    <Compile Include="Help.cs" />
+    <Compile Include="Extensions\NBotExtensions.cs" />
     <Compile Include="MemeGenerator.cs" />
     <Compile Include="Modules\PluginsModule.cs" />
     <Compile Include="Ping.cs" />

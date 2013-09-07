@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Autofac;
+using NBot.Core.Messaging;
 using NBot.Core.Modules;
 using Topshelf;
 
@@ -63,6 +64,7 @@ namespace NBot.Core
             _builder.RegisterModule(new HostModule());
             _builder.RegisterModule(new MessagingModule());
             _builder.RegisterModule(new Log4NetModule());
+            _builder.RegisterType<Help.Help>().AsSelf().AsImplementedInterfaces();
             IContainer container = _builder.Build();
 
             _host = HostFactory.New(config =>

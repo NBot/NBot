@@ -6,6 +6,9 @@
 # No App Config
 app.config
 
+# Dont Include Quick Start
+NBot.QuickStart/
+
 # mstest test results
 TestResults
 

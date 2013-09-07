@@ -101,13 +101,13 @@
     <Compile Include="User.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\NBot.Core\NBot.Core.csproj">
-      <Project>{47C2613C-84DE-4187-9186-959A52D430BC}</Project>
-      <Name>SDD.NBot.Core</Name>
-    </ProjectReference>
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <ProjectReference Include="..\NBot.Core\NBot.Core.csproj">
+      <Project>{47c2613c-84de-4187-9186-959a52d430bc}</Project>
+      <Name>NBot.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -7,7 +7,7 @@
     <Exec Command="nuget install .\packages.config -o $(SolutionDir)packages" />
   </Target>
   <Target Name="BuildPackage" >
-    <MSBuild Projects=".\src\NBot.Core\NBot.Core.csproj;.\src\NBot.Campfire\NBot.Campfire.csproj;.\src\NBot.Plugins\NBot.Plugins.csproj" Targets="Rebuild" BuildInParallel="true"  />
+    <MSBuild Projects="NBot.sln" Targets="Build"   />
     <CallTarget Targets="CopyBuild" />
     <!--<CallTarget Targets="CreatePackage"/>-->
   </Target>

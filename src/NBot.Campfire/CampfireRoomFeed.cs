@@ -27,7 +27,7 @@ namespace NBot.Campfire
             _user = container.Resolve<User>();
             _messagingService = container.Resolve<IMessagingService>();
             _brain = container.Resolve<IBrain>();
-            _request = WebRequest.CreateHttp(string.Format("https://streaming.campfirenow.com/room/{0}/live.json", roomId));
+            _request = (HttpWebRequest) WebRequest.Create(string.Format("https://streaming.campfirenow.com/room/{0}/live.json", roomId));
             _request.Headers.Add(HttpRequestHeader.Authorization, authorizationHeader);
         }
 
@@ -66,7 +66,7 @@ namespace NBot.Campfire
                                                               message += (char) value;
                                                           } while (value != 13);
                                                           // Run on another process and keep listening :)
-                                                          Task.Run(() => OnJsonMessageRecieved(message));
+                                                          Task.Factory.StartNew(() => OnJsonMessageRecieved(message));
                                                       }
                                                   }
                                               }

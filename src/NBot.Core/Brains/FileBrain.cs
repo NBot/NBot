@@ -43,7 +43,7 @@ namespace NBot.Core.Brains
                 _cache[key] = value;
 
                 // Run this in the background
-                Task.Run(() => SetKeyValue(key, value));
+                Task.Factory.StartNew(() => SetKeyValue(key, value));
             }
         }
 

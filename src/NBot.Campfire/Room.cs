@@ -28,37 +28,37 @@ namespace NBot.Campfire
 
         public UserMessage Speak(string message)
         {
-            return MessagingService.Send<UserMessage>(new SpeakMessage(Id, message));
+            return MessagingService.Send<UserMessage>(CampfireMessageFactory.CreateSpeakMessage(Id, message));
         }
 
         public bool ChangeTopic(string topic)
         {
-            return MessagingService.Send<bool>(new ChangeTopicMessage(Id, topic));
+            return MessagingService.Send<bool>(CampfireMessageFactory.CreateChangeTopicMessage(Id, topic));
         }
 
         public bool ChangeName(string name)
         {
-            return MessagingService.Send<bool>(new ChangeNameMessage(Id, name));
+            return MessagingService.Send<bool>(CampfireMessageFactory.CreateChangeNameMessage(Id, name));
         }
 
         public bool Join()
         {
-            return MessagingService.Send<bool>(new JoinRoomMessage(Id));
+            return MessagingService.Send<bool>(CampfireMessageFactory.CreateJoinRoomMessage(Id));
         }
 
         public bool Leave()
         {
-            return MessagingService.Send<bool>(new LeaveRoomMessage(Id));
+            return MessagingService.Send<bool>(CampfireMessageFactory.CreateLeaveRoomMessage(Id));
         }
 
         public bool Lock()
         {
-            return MessagingService.Send<bool>(new LockRoomMessage(Id));
+            return MessagingService.Send<bool>(CampfireMessageFactory.CreateLockRoomMessage(Id));
         }
 
         public bool Unlock()
         {
-            return MessagingService.Send<bool>(new UnlockRoomMessage(Id));
+            return MessagingService.Send<bool>(CampfireMessageFactory.CreateUnlockRoomMessage(Id));
         }
     }
 }

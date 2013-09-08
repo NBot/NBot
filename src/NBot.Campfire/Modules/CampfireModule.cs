@@ -39,12 +39,13 @@ namespace NBot.Campfire.Modules
                 .AsSelf()
                 .Named<HttpClient>("CampfireClient");
 
-            builder.Register(c => c.Resolve<IMessagingService>().Send<Account>(new GetAccountMessage())).SingleInstance();
-            builder.Register(c => c.Resolve<IMessagingService>().Send<User>(new GetMyUserMessage())).SingleInstance();
+            builder.Register(c => c.Resolve<IMessagingService>().Send<Account>(CampfireMessageFactory.CreateGetAccountMessage())).SingleInstance();
+
+            builder.Register(c => c.Resolve<IMessagingService>().Send<User>(CampfireMessageFactory.CreateGetMyUserMessage())).SingleInstance();
 
             builder.RegisterAssemblyTypes(ThisAssembly)
-                .AsClosedTypesOf(typeof(IMessageHandler<,>));
-
+                .As<IHandleMessages>()
+                .AsSelf();
 
             base.Load(builder);
         }

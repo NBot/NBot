@@ -4,5 +4,7 @@
     {
         int RoomId { get; set; }
         string Content { get; set; }
+        string MessageType { get;}
+
     }
 }

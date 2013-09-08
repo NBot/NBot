@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 
 namespace NBot.Campfire.Messages.IncomingMessages
 {
-    public class RoomMessage : IMessage
+    public class RoomMessage : GenericMessage
     {
         public RoomMessage()
         {

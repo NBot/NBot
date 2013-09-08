@@ -32,27 +32,27 @@ namespace NBot.Campfire
 
         public void Send(int roomId, string content)
         {
-            _messagingService.Send<UserMessage>(new SpeakMessage(roomId, content));
+            _messagingService.Send<UserMessage>(CampfireMessageFactory.CreateSpeakMessage(roomId, content));
         }
 
         public IEnumerable<IEntity> GetAllRooms()
         {
-            return _messagingService.Send<List<Room>>(new GetAllRoomsMessage());
+            return _messagingService.Send<List<Room>>(CampfireMessageFactory.CreateGetAllRoomsMessage());
         }
 
         public IEnumerable<IEntity> GetPresence()
         {
-            return _messagingService.Send<List<Room>>(new GetPresenceMessage());
+            return _messagingService.Send<List<Room>>(CampfireMessageFactory.CreateGetPresenceMessage());
         }
 
         public IEntity GetUser(int userId)
         {
-            return _messagingService.Send<User>(new GetUserMessage(userId));
+            return _messagingService.Send<User>(CampfireMessageFactory.CreateGetUserMessage(userId));
         }
 
         public IEnumerable<IEntity> GetUsersInRoom(int roomId)
         {
-            return _messagingService.Send<Room>(new GetRoomMessage(roomId)).Users;
+            return _messagingService.Send<Room>(CampfireMessageFactory.CreateGetRoomMessage(roomId)).Users;
         }
 
         #endregion

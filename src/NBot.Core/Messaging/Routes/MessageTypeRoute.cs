@@ -5,9 +5,9 @@ namespace NBot.Core.Messaging.Routes
 {
     public class MessageTypeRoute : IRoute
     {
-        private readonly Type _messageType;
+        private readonly string _messageType;
 
-        public MessageTypeRoute(Type reciever, MethodInfo endPoint, Type messageType)
+        public MessageTypeRoute(Type reciever, MethodInfo endPoint, string messageType)
         {
             _messageType = messageType;
             Reciever = reciever;
@@ -21,13 +21,12 @@ namespace NBot.Core.Messaging.Routes
 
         public bool IsMatch(IMessage message)
         {
-            Type type = message.GetType();
-            return type.IsAssignableFrom(_messageType);
+            return message.MessageType == _messageType;
         }
 
         public string[] GetMatchMetaData(IMessage message)
         {
-            return new[] {message.GetType().Name};
+            return new[] { message.GetType().Name };
         }
 
         #endregion

@@ -30,9 +30,9 @@ namespace NBot.Campfire
 
         public IMessagingService MessagingService { get; set; }
 
-        public Room GetRoom(int id)
+        public Room GetRoom(int roomId)
         {
-            return MessagingService.Send<Room>(new GetRoomMessage(id));
+            return MessagingService.Send<Room>(CampfireMessageFactory.CreateGetRoomMessage(roomId));
         }
 
         public List<User> GetOnlineUsers()
@@ -43,17 +43,17 @@ namespace NBot.Campfire
 
         public List<Room> GetRooms()
         {
-            return MessagingService.Send<List<Room>>(new GetAllRoomsMessage());
+            return MessagingService.Send<List<Room>>(CampfireMessageFactory.CreateGetAllRoomsMessage());
         }
 
         public List<Room> GetPresence()
         {
-            return MessagingService.Send<List<Room>>(new GetPresenceMessage());
+            return MessagingService.Send<List<Room>>(CampfireMessageFactory.CreateGetPresenceMessage());
         }
 
         public User GetUser(int userId)
         {
-            return MessagingService.Send<User>(new GetUserMessage(userId));
+            return MessagingService.Send<User>(CampfireMessageFactory.CreateGetUserMessage(userId));
         }
     }
 }

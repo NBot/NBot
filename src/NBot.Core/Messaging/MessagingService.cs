@@ -42,21 +42,21 @@ namespace NBot.Core.Messaging
 
         public TResult Send<TResult>(IMessage message)
         {
-            try
+            foreach (IRoute route in _router.GetRoutes(message))
             {
-                Type messageType = message.GetType();
-                Type handlerType = typeof (IMessageHandler<,>).MakeGenericType(messageType, typeof (TResult));
-                object handler = _container.Resolve(handlerType);
-                MethodInfo handlerMethod = handlerType.GetMethod("HandleMessage");
-                var result = (TResult) handlerMethod.Invoke(handler, BuildParameters(handlerMethod, message, new string[] {}));
-                _log.Info(string.Format("Sent {0}:{1} to {2}", message.GetType(), message.Content, handlerType.Name));
-                return result;
+                try
+                {
+                    object reciever = _container.Resolve(route.Reciever);
+                    MethodInfo endPoint = route.EndPoint;
+                    var result = endPoint.Invoke(reciever, BuildParameters(endPoint, message, route.GetMatchMetaData(message)));
+                    _log.Info(string.Format("Sent {0}:{1} to {2}", message.GetType(), message.Content, route.Reciever.Name));
+                    return (TResult)result;
+                }
+                catch (Exception e)
+                {
+                    _log.Error(string.Format("Error while sending message: {0}", message.Content), e);
+                }
             }
-            catch (Exception e)
-            {
-                _log.Error(string.Format("Error while sending message: {0}", message.Content), e);
-            }
-
             return default(TResult);
         }
 
@@ -75,7 +75,7 @@ namespace NBot.Core.Messaging
                 {
                     result[parameterIndex] = message;
                 }
-                else if (parameter.ParameterType == typeof (string[])
+                else if (parameter.ParameterType == typeof(string[])
                          && (parameter.Name == "matches"
                              || parameter.Name == "metadata"))
                 {

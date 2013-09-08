@@ -7,14 +7,14 @@ namespace NBot.Campfire.Plugins
 {
     public class Greeter : RecieveMessages
     {
-        [RecieveByType(typeof(EnterMessage))]
+        [RecieveByType("EnterMessage")]
         public void RecieveEnterMessage(EnterMessage message, IHostAdapter host)
         {
             var user = host.GetUser(message.UserId);
             host.ReplyTo(message, string.Format("Welcome, {0}", user.Name));
         }
 
-        [RecieveByType(typeof(LeaveMessage))]
+        [RecieveByType("LeaveMessage")]
         public void RecieveLeaveMessage(LeaveMessage message, IHostAdapter host)
         {
             var user = host.GetUser(message.UserId);

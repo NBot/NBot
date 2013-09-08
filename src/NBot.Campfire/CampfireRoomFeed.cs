@@ -150,6 +150,8 @@ namespace NBot.Campfire
                     break;
             }
 
+         
+
             // Dont send messages that I posted
             var userMessage = message as UserMessage;
             if (userMessage != null)

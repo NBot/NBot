@@ -23,13 +23,29 @@ namespace NBot.Core.Messaging
             return _routes.Where(r => r.IsMatch(message));
         }
 
-        public void BuildRoutes(IEnumerable<IRecieveMessages> messageRecievers)
+        public void BuildHandlerRoutes(IEnumerable<IHandleMessages> messageHandlers)
+        {
+            foreach (var handlerType in messageHandlers.Select(h => h.GetType()))
+            {
+                foreach (var methodInfo in handlerType.GetMethods(BindingFlags.Public | BindingFlags.Instance))
+                {
+                    object[] messageAttributes = methodInfo.GetCustomAttributes(typeof(HandleMessageAttribute), true);
+
+                    foreach (HandleMessageAttribute customAttibute in messageAttributes)
+                    {
+                        AddRoute(customAttibute.CreateRoute(handlerType, methodInfo));
+                    }
+                }
+            }
+        }
+
+        public void BuildRecieverRoutes(IEnumerable<IRecieveMessages> messageRecievers)
         {
             foreach (Type recieverType in messageRecievers.Select(r => r.GetType()))
             {
                 foreach (MethodInfo methodInfo in recieverType.GetMethods(BindingFlags.Public | BindingFlags.Instance))
                 {
-                    object[] messageAttributes = methodInfo.GetCustomAttributes(typeof (RecieveMessageAttribute), true);
+                    object[] messageAttributes = methodInfo.GetCustomAttributes(typeof(RecieveMessageAttribute), true);
 
                     foreach (RecieveMessageAttribute customAttibute in messageAttributes)
                     {

@@ -66,6 +66,7 @@
     <Compile Include="Brains\FileBrain.cs" />
     <Compile Include="Brains\IBrain.cs" />
     <Compile Include="Brains\SimpleBrain.cs" />
+    <Compile Include="Container\INBotContainer.cs" />
     <Compile Include="Extensions\NBotExtensions.cs" />
     <Compile Include="Extensions\ObjectExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
@@ -76,22 +77,22 @@
     <Compile Include="HostAdapter.cs" />
     <Compile Include="IHostAdapter.cs" />
     <Compile Include="IMessageAdapter.cs" />
-    <Compile Include="INBotSettings.cs" />
     <Compile Include="IPlugin.cs" />
     <Compile Include="IEntity.cs" />
+    <Compile Include="Messaging\Attributes\HandleMessageAttribute.cs" />
+    <Compile Include="Messaging\Attributes\HandleByTypeAttribute.cs" />
     <Compile Include="Messaging\Attributes\RecieveByRegexAttribute.cs" />
     <Compile Include="Messaging\Attributes\RecieveMessageAttribute.cs" />
-    <Compile Include="Messaging\Attributes\RecievesMessagesAttribute.cs" />
     <Compile Include="Messaging\Attributes\RecieveByTypeAttribute.cs" />
     <Compile Include="Messaging\Attributes\RespondByRegexAttribute.cs" />
     <Compile Include="Messaging\ContentFilters\BrainDataContentFilter.cs" />
     <Compile Include="Messaging\ContentFilters\RegexFilter.cs" />
     <Compile Include="Messaging\ContentFilters\IContentFilter.cs" />
     <Compile Include="Messaging\ContentFilters\RegexReplacementFilter.cs" />
-    <Compile Include="Messaging\EmptyMessage.cs" />
     <Compile Include="Messaging\FilteringMessagingService.cs" />
+    <Compile Include="Messaging\GenericMessage.cs" />
+    <Compile Include="Messaging\IHandleMessages.cs" />
     <Compile Include="Messaging\IMessage.cs" />
-    <Compile Include="Messaging\IMessageHandler.cs" />
     <Compile Include="Messaging\IMessageRouter.cs" />
     <Compile Include="Messaging\IMessagingService.cs" />
     <Compile Include="Messaging\IRecieveMessages.cs" />
@@ -113,6 +114,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

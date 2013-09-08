@@ -7,6 +7,7 @@ namespace NBot.Core.Messaging
     {
         void AddRoute(IRoute route);
         IEnumerable<IRoute> GetRoutes(IMessage message);
-        void BuildRoutes(IEnumerable<IRecieveMessages> messageRecievers);
+        void BuildHandlerRoutes(IEnumerable<IHandleMessages> messageHandlers);
+        void BuildRecieverRoutes(IEnumerable<IRecieveMessages> messageRecievers);
     }
 }

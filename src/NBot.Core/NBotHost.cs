@@ -48,12 +48,14 @@ namespace NBot.Core
 
         private void InitalizeHost()
         {
+            var router = _container.Resolve<IMessageRouter>();
+            List<IHandleMessages> messageHandlers = _container.Resolve<IEnumerable<IHandleMessages>>().ToList();
+            router.BuildHandlerRoutes(messageHandlers);
             List<IRecieveMessages> messageRecievers = _container.Resolve<IEnumerable<IRecieveMessages>>().ToList();
-
             InitalizeHelp(messageRecievers);
             InitalizeMessageFeeds();
             InitalizeMessageAdapters();
-            InitalizeRouter(messageRecievers);
+            router.BuildRecieverRoutes(messageRecievers);
         }
 
         private void InitalizeMessageAdapters()
@@ -64,12 +66,6 @@ namespace NBot.Core
         private void InitalizeMessageFeeds()
         {
             _messageFeeds = _container.Resolve<IEnumerable<IMessageFeed>>().ToList();
-        }
-
-        private void InitalizeRouter(IEnumerable<IRecieveMessages> messageRecievers)
-        {
-            var router = _container.Resolve<IMessageRouter>();
-            router.BuildRoutes(messageRecievers);
         }
 
         private void InitalizeHelp(IEnumerable<IRecieveMessages> messageRecievers)

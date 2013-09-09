@@ -19,5 +19,17 @@ namespace NBot.Plugins.Extensions
                     .AsImplementedInterfaces());
             return target;
         }
+
+       public static Core.NBot ConfigureJoinMe(this Core.NBot target, string authCode)
+       {
+           target.AddSetting("JoinMeAuthCode", authCode);
+           return target;
+       }
+
+       public static Core.NBot ConfigureStackOverflowSearch(this Core.NBot target, string ackappsApiKey)
+       {
+           target.AddSetting("AckappsApiKey", ackappsApiKey);
+           return target;
+       }
     }
 }

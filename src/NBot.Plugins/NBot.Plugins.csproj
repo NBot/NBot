@@ -76,6 +76,7 @@
     <Reference Include="System.Web" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Achievement.cs" />
     <Compile Include="Akbar.cs" />
     <Compile Include="Announce.cs" />
     <Compile Include="AsciiMe.cs" />

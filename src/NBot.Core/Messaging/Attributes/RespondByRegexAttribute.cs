@@ -13,7 +13,7 @@ namespace NBot.Core.Messaging.Attributes
             string name = NBot.Name ?? "nbot";
             string alias = NBot.Alias ?? "bot";
             _pattern = string.Format("^[@]?(?:{0}[:,]?|{1}[:,]?)\\s*(?:{2})", alias, name, pattern);
-            ;
+            
         }
 
         public override IRoute CreateRoute(Type reciever, MethodInfo endpoint)

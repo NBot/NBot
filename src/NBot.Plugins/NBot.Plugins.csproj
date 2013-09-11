@@ -87,6 +87,7 @@
     <Compile Include="MemeGenerator.cs" />
     <Compile Include="Modules\PluginsModule.cs" />
     <Compile Include="Ping.cs" />
+    <Compile Include="Sensitive.cs" />
     <Compile Include="Sosearch.cs" />
     <Compile Include="ChuckNorris.cs" />
     <Compile Include="FacePalm.cs" />

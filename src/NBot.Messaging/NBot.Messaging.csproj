@@ -42,9 +42,13 @@
     <Compile Include="Attributes\HandleMessageAttribute.cs" />
     <Compile Include="Attributes\HearAttribute.cs" />
     <Compile Include="Attributes\RespondAttribute.cs" />
-    <Compile Include="ContentFilters\IContentFilter.cs" />
-    <Compile Include="ContentFilters\RegexFilter.cs" />
-    <Compile Include="ContentFilters\RegexReplacementFilter.cs" />
+    <Compile Include="Attributes\MessageTypeAttribute.cs" />
+    <Compile Include="MessageFilterAdapter.cs" />
+    <Compile Include="MessageFilterClient.cs" />
+    <Compile Include="MessageFilterProducer.cs" />
+    <Compile Include="MessageFilters\IMessageFilter.cs" />
+    <Compile Include="MessageFilters\RegexMessageFilter.cs" />
+    <Compile Include="MessageFilters\RegexReplacementMessageFilter.cs" />
     <Compile Include="IAdapter.cs" />
     <Compile Include="Message.cs" />
     <Compile Include="IMessageRouter.cs" />

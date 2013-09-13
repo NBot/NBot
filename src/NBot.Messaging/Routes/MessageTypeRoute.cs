@@ -7,10 +7,10 @@ namespace NBot.Messaging.Routes
     {
         private readonly string _messageType;
 
-        public MessageTypeRoute(Type reciever, MethodInfo endPoint, string messageType)
+        public MessageTypeRoute(Type handler, MethodInfo endPoint, string messageType)
         {
             _messageType = messageType;
-            Handler = reciever;
+            Handler = handler;
             EndPoint = endPoint;
         }
 

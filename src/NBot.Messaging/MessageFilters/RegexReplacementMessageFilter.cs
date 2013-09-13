@@ -1,19 +1,19 @@
 ﻿using System.Text.RegularExpressions;
 
-namespace NBot.Messaging.ContentFilters
+namespace NBot.Messaging.MessageFilters
 {
-    public class RegexReplacementFilter : IContentFilter
+    public class RegexReplacementMessageFilter : IMessageFilter
     {
         private readonly string _pattern;
         private readonly string _replacement;
 
-        public RegexReplacementFilter(string pattern, string replacement)
+        public RegexReplacementMessageFilter(string pattern, string replacement)
         {
             _pattern = pattern;
             _replacement = replacement;
         }
 
-        #region IContentFilter Members
+        #region IMessageFilter Members
 
         public bool FilterMessage(Message message)
         {

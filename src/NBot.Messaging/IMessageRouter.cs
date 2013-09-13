@@ -1,5 +1,5 @@
 ﻿using System.Collections;
-using NBot.Messaging.ContentFilters;
+using NBot.Messaging.MessageFilters;
 
 namespace NBot.Messaging
 {
@@ -7,6 +7,6 @@ namespace NBot.Messaging
     {
         void RegisterMessageHandler(IMessageHandler handler);
         void RegisterAdapter(IAdapter adapter, string channel);
-        void RegisterContentFilter(IContentFilter filter);
+        void RegisterContentFilter(IMessageFilter filter);
     }
 }

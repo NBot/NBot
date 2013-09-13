@@ -1,17 +1,17 @@
 ﻿using System.Text.RegularExpressions;
 
-namespace NBot.Messaging.ContentFilters
+namespace NBot.Messaging.MessageFilters
 {
-    public class RegexFilter : IContentFilter
+    public class RegexMessageFilter : IMessageFilter
     {
         private readonly string _pattern;
 
-        public RegexFilter(string pattern)
+        public RegexMessageFilter(string pattern)
         {
             _pattern = pattern;
         }
 
-        #region IContentFilter Members
+        #region IMessageFilter Members
 
         public bool FilterMessage(Message message)
         {

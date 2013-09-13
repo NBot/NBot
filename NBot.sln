@@ -17,8 +17,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NBot.Messaging", "src\NBot.Messaging\NBot.Messaging.csproj", "{DCEA0219-7995-471B-B765-A9E6CE478C41}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuickStart", "QuickStart\QuickStart.csproj", "{CCD22054-1F1A-4A7B-9356-3999FA9DE5CA}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,10 +39,6 @@ Global
 		{DCEA0219-7995-471B-B765-A9E6CE478C41}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DCEA0219-7995-471B-B765-A9E6CE478C41}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DCEA0219-7995-471B-B765-A9E6CE478C41}.Release|Any CPU.Build.0 = Release|Any CPU
-		{CCD22054-1F1A-4A7B-9356-3999FA9DE5CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CCD22054-1F1A-4A7B-9356-3999FA9DE5CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CCD22054-1F1A-4A7B-9356-3999FA9DE5CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CCD22054-1F1A-4A7B-9356-3999FA9DE5CA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -3,18 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using NBot.Messaging.Attributes;
-using NBot.Messaging.ContentFilters;
+using NBot.Messaging.MessageFilters;
 using NBot.Messaging.Routes;
 
 namespace NBot.Messaging
 {
     public class MessageRouter : IMessageRouter
     {
-        private readonly List<IContentFilter> _filters = new List<IContentFilter>();
+        private readonly List<IMessageProducer>  _producers = new List<IMessageProducer>();
+        private readonly List<IMessageFilter> _filters = new List<IMessageFilter>();
         private readonly List<IRoute> _routes = new List<IRoute>();
         private readonly Dictionary<string, IAdapter> _adapters = new Dictionary<string, IAdapter>();
 
-        public void RegisterContentFilter(IContentFilter filter)
+        public void RegisterContentFilter(IMessageFilter filter)
         {
             _filters.Add(filter);
         }
@@ -25,7 +26,7 @@ namespace NBot.Messaging
 
             foreach (var endpoint in handlerType.GetMethods(BindingFlags.Public | BindingFlags.Instance))
             {
-                object[] messageAttributes = endpoint.GetCustomAttributes(typeof(HandleMessageAttribute), true);
+                var messageAttributes = endpoint.GetCustomAttributes(typeof(HandleMessageAttribute), true);
 
                 foreach (HandleMessageAttribute messageAttribute in messageAttributes)
                 {
@@ -38,12 +39,14 @@ namespace NBot.Messaging
         {
             if (_adapters.ContainsKey(channel))
                 throw new ApplicationException("There is already an adapter registered on that channel.");
+            
+            var filteredAdapter = new MessageFilterAdapter(adapter, _filters);
 
-            _adapters.Add(channel, adapter);
+            _adapters.Add(channel, filteredAdapter);
 
-            if (adapter.Producer != null)
+            if (filteredAdapter.Producer != null)
             {
-                adapter.Producer.MessageProduced += OnMessageProduced;
+                filteredAdapter.Producer.MessageProduced += OnMessageProduced;
             }
         }
 
@@ -54,18 +57,12 @@ namespace NBot.Messaging
                 var adapter = _adapters[message.Channel];
                 var client = adapter.Client;
 
-                if (_filters.Any(contentFilter => contentFilter.FilterMessage(message)))
-                {
-                    return;
-                }
-
                 foreach (var route in _routes)
                 {
                     if (route.IsMatch(message))
                     {
                         var handler = Activator.CreateInstance(route.Handler);
                         var endpoint = route.EndPoint;
-
                         endpoint.Invoke(handler, BuildParameters(endpoint, message, client, route.GetMatchMetaData(message)));
                     }
                 }

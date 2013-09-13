@@ -7,6 +7,6 @@ namespace NBot.Messaging
 {
     public interface IMessageHandler
     {
-
+        
     }
 }

@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Attributes\HandleMessageAttribute.cs" />
     <Compile Include="IAdapter.cs" />
     <Compile Include="Message.cs" />
     <Compile Include="IMessageRouter.cs" />
@@ -47,6 +48,9 @@
     <Compile Include="IMessageProducer.cs" />
     <Compile Include="IEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Routes\IRoute.cs" />
+    <Compile Include="Routes\MessageTypeRoute.cs" />
+    <Compile Include="Routes\RegexRoute.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

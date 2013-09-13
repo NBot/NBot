@@ -40,6 +40,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Attributes\HandleMessageAttribute.cs" />
+    <Compile Include="Attributes\HearAttribute.cs" />
+    <Compile Include="Attributes\RespondAttribute.cs" />
+    <Compile Include="ContentFilters\IContentFilter.cs" />
+    <Compile Include="ContentFilters\RegexFilter.cs" />
+    <Compile Include="ContentFilters\RegexReplacementFilter.cs" />
     <Compile Include="IAdapter.cs" />
     <Compile Include="Message.cs" />
     <Compile Include="IMessageRouter.cs" />
@@ -47,6 +52,7 @@
     <Compile Include="IMessageHandler.cs" />
     <Compile Include="IMessageProducer.cs" />
     <Compile Include="IEntity.cs" />
+    <Compile Include="MessageRouter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Routes\IRoute.cs" />
     <Compile Include="Routes\MessageTypeRoute.cs" />

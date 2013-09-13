@@ -7,11 +7,11 @@ namespace NBot.Messaging.Routes
 {
     public class RegexRoute : IRoute
     {
-        private readonly string _regex;
+        private readonly string _pattern;
 
-        public RegexRoute(Type handler, MethodInfo endPoint, string regex)
+        public RegexRoute(Type handler, MethodInfo endPoint, string pattern)
         {
-            _regex = regex;
+            _pattern = pattern;
             Handler = handler;
             EndPoint = endPoint;
         }
@@ -23,12 +23,12 @@ namespace NBot.Messaging.Routes
 
         public bool IsMatch(Message message)
         {
-            return !string.IsNullOrEmpty(message.Content) && Regex.IsMatch(message.Content, _regex, RegexOptions.IgnoreCase);
+            return !string.IsNullOrEmpty(message.Content) && Regex.IsMatch(message.Content, _pattern, RegexOptions.IgnoreCase);
         }
 
         public string[] GetMatchMetaData(Message message)
         {
-            Match match = Regex.Match(message.Content, _regex, RegexOptions.IgnoreCase);
+            Match match = Regex.Match(message.Content, _pattern, RegexOptions.IgnoreCase);
 
             var result = new List<string>();
 

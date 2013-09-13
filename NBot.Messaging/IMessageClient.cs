@@ -8,7 +8,7 @@ namespace NBot.Messaging
     public interface IMessageClient
     {
         void SendMessage(string message, string roomId, string userId = null);
-        IUser GetUser(string userId);
-        IRoom GetRoom(string roomId);
+        IEntity GetUser(string userId);
+        IEntity GetRoom(string roomId);
     }
 }

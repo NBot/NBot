@@ -5,7 +5,7 @@ using System.Text;
 
 namespace NBot.Messaging
 {
-    public delegate void MessageProducedHandler(IMessage message);
+    public delegate void MessageProducedHandler(Message message);
 
     public interface IMessageProducer
     {

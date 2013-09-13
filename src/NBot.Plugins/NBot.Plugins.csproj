@@ -84,6 +84,8 @@
     <Compile Include="DownForMe.cs" />
     <Compile Include="ExcuseMe.cs" />
     <Compile Include="Extensions\NBotExtensions.cs" />
+    <Compile Include="FortuneMe.cs" />
+    <Compile Include="Hello.cs" />
     <Compile Include="MemeGenerator.cs" />
     <Compile Include="Modules\PluginsModule.cs" />
     <Compile Include="Ping.cs" />

@@ -7,9 +7,9 @@ A .NET "port" of git hub's Hubot that grew a life of it's own. Hey! .NET folk ca
 NBot is a "port" of git hub's Hubot but targeted at the .NET platform. It acts as a messaging framework for you to add on to. Currently there is an implementation for Campfire and a base set of plugins for you to enjoy.
 
 ## What can I add to NBot?
-1. You can add plugins that respond to messages sent from a message publisher like Campfire. 
-2. You can create new message publishers.
-3. You can create content filters.
+1. You can add Message Handlers that respond to messages sent from an Adapter like Campfire. 
+2. You can create new Adapters.
+3. You can create Message Filters.
 4. Add features to the core application.
 
 ## Getting Started
@@ -22,9 +22,9 @@ Creating your first plugin.
 * Done!
 
 ```
- public class HelloNBot : RecieveMessages {
+ public class HelloNBot : MessageHandler {
 
-    [RecieveByRegex("Hello NBot")]
+    [Hear("Hello NBot")]
     public void DoHelloNBot(IUserMessage message, IHostAdapter host){
         IEntity user = host.GetUser(message.UserId);
         host.ReplyTo(message, string.Format("Hi {0}, how are you?",user.Name));
@@ -43,13 +43,31 @@ Creating your first plugin.
 ```
 static void Main(string[] args)
 {
-    Core.NBot.Create("NBot") // The Name of you bot
-        .Register(b => b.RegisterModule(new PluginsModule())) // Load the Plugins Module
-       .UseCampfire("YOUR_AUTH_CODE", "YOUR_ACCOUNT_SUBDOMAIN", new[] { 12345 }.ToList())
-       .UseFileBrain() // Use the File Brain
-       .UseHandleBars() // Use Handlebars Brain Data Replacement
-       .AddSetting("AnnounceRooms", "*") // This is for the announce plugin
-       .Start(); // Get Crackin'
+            // New up a brain to use
+            var brain = new FileBrain(".\\Brain");
+
+            Robot.Create("NBot")
+                .UseBrain(brain) // <- Use your brain
+                .RegisterMessageFilter(new HandleBarsMessageFilter(brain)) // <- Register zero or more Message Filters
+                .RegisterAdapter(new ConsoleAdapter(), "ConsoleChannel") // <- Register one ore more Adapters
+                .RegisterHandler(new Achievement()) // <- Register zero or more message handlers
+                .RegisterHandler(new Akbar())
+                .RegisterHandler(new Announce())
+                .RegisterHandler(new AsciiMe())
+                .RegisterHandler(new CalmDown())
+                .RegisterHandler(new ChuckNorris())
+                .RegisterHandler(new DownForMe())
+                .RegisterHandler(new ExcuseMe())
+                .RegisterHandler(new FacePalm())
+                .RegisterHandler(new FortuneMe())
+                .RegisterHandler(new Hello())
+                .RegisterHandler(new MemeGenerator())
+                .RegisterHandler(new Pager())
+                .RegisterHandler(new Ping())
+                .RegisterHandler(new Remember())
+                .RegisterHandler(new Sensitive())
+                .RegisterHandler(new Swanson())
+                .Run(); // <- Get Crackin
 }
 ```
 

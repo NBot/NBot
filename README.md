@@ -12,6 +12,12 @@ NBot is a "port" of git hub's Hubot but targeted at the .NET platform. It acts a
 3. You can create Message Filters.
 4. Add features to the core application.
 
+## Want to contribute?
+1. Create wiki pages
+2. Create [Message Handlers](https://github.com/NBot/NBot/wiki/Message-Handler)
+3. Create Adapters
+4. Create Message Filters
+
 ## Getting Started
 Creating your first plugin.
 * Create a class and inherit from RecieveMessages.

@@ -2,12 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using NBot.Core.Messaging;
-using NBot.Core.Messaging.Attributes;
+using NBot.Core.Attributes;
+using ServiceStack.Messaging;
 
 namespace NBot.Core.Help
 {
-    public class Help : RecieveMessages
+    public class Help : MessageHandler
     {
         private readonly IEnumerable<HelpInformation> _helpInformation;
 
@@ -16,34 +16,33 @@ namespace NBot.Core.Help
             _helpInformation = helpInformation;
         }
 
-        [RespondByRegex("(help|commands)(.*)")]
-        public void HelpCommand(IMessage message, IHostAdapter host, string[] matches)
+        [Respond("(help|commands)(.*)")]
+        public void HelpCommand(Message message, IMessageClient client, string[] matches)
         {
             try
             {
                 if (matches.Count() <= 2)
                 {
-                    MainHelpMenu(message, host);
+                    MainHelpMenu(message, client);
                 }
                 else
                 {
-                    PluginHelp(message, host, matches[2]);
+                    PluginHelp(message, client, matches[2]);
                 }
             }
             catch (Exception ex)
             {
-                EventLog.WriteEntry("NBot-Help", ex.ToString());
-                host.ReplyTo(message, "The Help plugin blew up. We're all in trouble now!");
+                client.ReplyTo(message, "The Help plugin blew up. We're all in trouble now!");
             }
         }
 
-        private void MainHelpMenu(IMessage message, IHostAdapter host)
+        private void MainHelpMenu(Message message, IMessageClient client)
         {
             string response = _helpInformation.Aggregate("List of Plugins. Please use help <plugin> for more information.", (current, helpInformation) => current + ("\n\t-" + helpInformation.Plugin));
-            host.ReplyTo(message, response);
+            client.ReplyTo(message, response);
         }
 
-        private void PluginHelp(IMessage message, IHostAdapter host, string plugIn)
+        private void PluginHelp(Message message, IMessageClient client, string plugIn)
         {
             string ouputMessage = string.Format("Commands for {0}:", plugIn);
             IEnumerable<List<Command>> helpInformationCommands = _helpInformation.Where(hi => hi.Plugin.ToLower() == plugIn.ToLower()).Select(hi => hi.Commands);
@@ -56,7 +55,7 @@ namespace NBot.Core.Help
                 }
             }
 
-            host.ReplyTo(message, helpInformationCommands.Any()
+            client.ReplyTo(message, helpInformationCommands.Any()
                                       ? ouputMessage
                                       : string.Format("Plugin '{0}' not found.", plugIn));
         }

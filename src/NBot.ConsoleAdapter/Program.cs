@@ -1,10 +1,7 @@
-﻿using System;
-using System.Linq;
-using NBot.Core;
+﻿using NBot.Core;
 using NBot.Core.Brains;
 using NBot.Core.Messaging.ContentFilters;
-using NBot.Plugins;
-using NBot.CampfireAdapter;
+using NBot.MessageHandlers;
 
 namespace NBot.ConsoleAdapter
 {

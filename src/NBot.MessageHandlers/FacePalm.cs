@@ -4,7 +4,7 @@ using NBot.Core.Attributes;
 using NBot.Core.Help;
 using ServiceStack.Service;
 
-namespace NBot.Plugins
+namespace NBot.MessageHandlers
 {
     public class FacePalm : MessageHandler
     {

@@ -4,7 +4,7 @@ using NBot.Core.Help;
 using ServiceStack.Service;
 using ServiceStack.Text;
 
-namespace NBot.Plugins
+namespace NBot.MessageHandlers
 {
     public class AsciiMe : MessageHandler
     {

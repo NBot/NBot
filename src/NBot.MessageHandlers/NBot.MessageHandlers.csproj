@@ -7,8 +7,8 @@
     <ProjectGuid>{E0892510-92C5-44A1-A33E-2CBD0AD96E0E}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>NBot.Plugins</RootNamespace>
-    <AssemblyName>NBot.Plugins</AssemblyName>
+    <RootNamespace>NBot.MessageHandlers</RootNamespace>
+    <AssemblyName>NBot.MessageHandlers</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

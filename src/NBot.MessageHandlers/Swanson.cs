@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
+﻿using System.Text.RegularExpressions;
 using NBot.Core;
 using NBot.Core.Attributes;
 using NBot.Core.Help;
 
-
-namespace NBot.Plugins
+namespace NBot.MessageHandlers
 {
     public class Swanson : MessageHandler
     {

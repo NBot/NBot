@@ -2,7 +2,7 @@
 using NBot.Core.Attributes;
 using NBot.Core.Help;
 
-namespace NBot.Plugins
+namespace NBot.MessageHandlers
 {
     public class Akbar : MessageHandler
     {

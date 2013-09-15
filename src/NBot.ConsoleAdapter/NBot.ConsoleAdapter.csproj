@@ -55,9 +55,9 @@
       <Project>{dcea0219-7995-471b-b765-a9e6ce478c41}</Project>
       <Name>NBot.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\NBot.Plugins\NBot.Plugins.csproj">
+    <ProjectReference Include="..\NBot.MessageHandlers\NBot.MessageHandlers.csproj">
       <Project>{e0892510-92c5-44a1-a33e-2cbd0ad96e0e}</Project>
-      <Name>NBot.Plugins</Name>
+      <Name>NBot.MessageHandlers</Name>
     </ProjectReference>
     <ProjectReference Include="D:\Repositories\Git\NBot III\src\NBot.CampfireAdapter\NBot.CampfireAdapter.csproj">
       <Project>{BC069E29-05CF-4842-B953-E935F59FA372}</Project>

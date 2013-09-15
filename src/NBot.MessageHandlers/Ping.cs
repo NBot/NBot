@@ -3,8 +3,7 @@ using NBot.Core;
 using NBot.Core.Attributes;
 using NBot.Core.Help;
 
-
-namespace NBot.Plugins
+namespace NBot.MessageHandlers
 {
     public class Ping : MessageHandler
     {

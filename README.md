@@ -31,6 +31,7 @@ Creating your first plugin.
     }
 }
 ```
+see [Message Handler](MessageHandler) for more information...
 
 ## Quick Start - Console Setup
 * Set ConsoleAdapter Project as the Startup Project

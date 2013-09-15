@@ -32,10 +32,8 @@ Creating your first plugin.
 }
 ```
 
-## Quick Start - Campfire Setup
-* Create a console aplication
-* Include NBot Core, Campfire and Plugins
-* Include Dependencies
+## Quick Start - Console Setup
+* Set ConsoleAdapter Project as the Startup Project
 * Use the Fluent interface to configure your NBot
 * Chat Bot Bliss....
 

@@ -31,7 +31,7 @@ Creating your first plugin.
     }
 }
 ```
-see [Message Handler](MessageHandler) for more information...
+see [Message Handler](https://github.com/NBot/NBot/wiki/Message-Handler) for more information...
 
 ## Quick Start - Console Setup
 * Set ConsoleAdapter Project as the Startup Project

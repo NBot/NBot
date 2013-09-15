@@ -1,8 +1,5 @@
 NBot
 ====
-
-A .NET "port" of git hub's Hubot that grew a life of it's own. Hey! .NET folk can have fun too.
-
 ## What is NBot?
 NBot is a "port" of git hub's Hubot but targeted at the .NET platform. It acts as a messaging framework for you to add on to. Currently there is an implementation for Campfire and a base set of plugins for you to enjoy.
 
@@ -17,6 +14,11 @@ NBot is a "port" of git hub's Hubot but targeted at the .NET platform. It acts a
 2. Create [Message Handlers](https://github.com/NBot/NBot/wiki/Message-Handler)
 3. Create Adapters
 4. Create Message Filters
+
+## Open Source Dependencies
+1. [ServiceStack.Common](https://github.com/ServiceStack/ServiceStack)
+2. [ServiceStack.Text](https://github.com/ServiceStack/ServiceStack.Text)
+3. [ServiceStack.Interfaces](https://github.com/ServiceStack/ServiceStack)
 
 ## Getting Started
 Creating your first plugin.
@@ -75,4 +77,6 @@ static void Main(string[] args)
                 .Run(); // <- Get Crackin
 }
 ```
+
+
 

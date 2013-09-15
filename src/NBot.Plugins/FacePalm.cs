@@ -1,22 +1,23 @@
-﻿using System.Net.Http;
+﻿using System.Net;
 using NBot.Core;
+using NBot.Core.Attributes;
 using NBot.Core.Help;
-using NBot.Core.Messaging;
-using NBot.Core.Messaging.Attributes;
+using ServiceStack.Service;
 
 namespace NBot.Plugins
 {
-    public class FacePalm : RecieveMessages
+    public class FacePalm : MessageHandler
     {
         [Help(Syntax = "facepalm",
             Description = "Anytime the word 'facepalm' is detected, a picture of a facepalm will be posted into the room.",
             Example = "facepalm")]
-        [RecieveByRegex("facepalm")]
-        public void Recieve(IMessage message, IHostAdapter host)
+        [Hear("facepalm")]
+        public void Recieve(Message message, IMessageClient client)
         {
-            HttpClient client = CreateHttpClient("http://facepalm.org");
-            string imageUrl = client.GetAsync("/img.php").Result.RequestMessage.RequestUri.AbsoluteUri;
-            host.ReplyTo(message, imageUrl);
+            IRestClient httpClient = GetJsonServiceClient("http://facepalm.org");
+            var response = httpClient.Get<HttpWebResponse>("/img.php");
+            var imageUrl = response.ResponseUri.AbsoluteUri;
+            client.ReplyTo(message, imageUrl);
         }
     }
 }

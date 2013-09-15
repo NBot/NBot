@@ -1,22 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Web;
-using NBot.Core;
-using NBot.Core.Messaging;
-using NBot.Core.Messaging.Attributes;
+﻿using NBot.Core;
+using NBot.Core.Attributes;
+using NBot.Core.Help;
 
 namespace NBot.Plugins
 {
-    public class Achievement : RecieveMessages
+    public class Achievement : MessageHandler
     {
-        [RespondByRegex("achievement (get|unlock(ed)?) (.+)")]
-        public void DoAchievement(IMessage message, IHostAdapter host, string[] matches)
+        [Help(Syntax = "[{0}|{1}] achievement [get|unlock|unlocked] <achievement text>", Description = "Get an XBox badge with the achievement on it.", Example = "nbot achievement unlocked Winning!")]
+        [Respond("achievement (get|unlock(ed)?) (.+)")]
+        public void DoAchievement(Message message, IMessageClient client, string[] matches)
         {
-            var caption = Uri.EscapeUriString(matches.Length == 4 ? matches[3] : matches[2]);
-            var url = string.Format("http://achievement-unlocked.heroku.com/xbox/{0}.png", caption);
-            host.ReplyTo(message, url);
+            string caption = UrlEncode(matches.Length == 4 ? matches[3] : matches[2]);
+            string url = string.Format("http://achievement-unlocked.heroku.com/xbox/{0}.png", caption);
+            client.ReplyTo(message, url);
         }
     }
 }

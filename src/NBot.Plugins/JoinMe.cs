@@ -1,27 +1,28 @@
 ﻿using System;
 using NBot.Core;
+using NBot.Core.Attributes;
 using NBot.Core.Help;
-using NBot.Core.Messaging;
-using NBot.Core.Messaging.Attributes;
+
 
 namespace NBot.Plugins
 {
-    public class JoinMe : RecieveMessages
+    public class JoinMe : MessageHandler
     {
         [Help(Syntax = "joinme",
             Description = "This command will create a join.me meeting and post the details into the room.",
             Example = "joinme")]
-        [RecieveByRegex("joinme$")]
-        public void CreateJoinMe(IMessage message, IHostAdapter host)
+        [Hear("joinme$")]
+        public void CreateJoinMe(Message message, IMessageClient client)
         {
-            string authCode = Core.NBot.Settings["JoinMeAuthCode"] as string;
+            var authCode = Robot.GetSetting<string>("JoinMeAuthCode");
 
-            string result = CreateHttpClient(string.Format("https://secure.join.me/API/requestCode?authCode={0}", authCode))
-                .GetAsync("")
-                .Result
-                .Content
-                .ReadAsStringAsync()
-                .Result;
+            if (string.IsNullOrEmpty(authCode))
+            {
+                throw new ArgumentException("Please set the JoinMeAuthCode.");
+            }
+
+            var result = GetJsonServiceClient(string.Format("https://secure.join.me/API/requestCode?authCode={0}", authCode))
+                .Get<String>("/");
 
             string[] stuff = result.Split(new[] { ':', '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
 
@@ -31,8 +32,8 @@ namespace NBot.Plugins
             string viewer = string.Format("Viewer: http://join.me/{0}", code);
 
 
-            host.ReplyTo(message, presenter);
-            host.ReplyTo(message, viewer);
+            client.ReplyTo(message, presenter);
+            client.ReplyTo(message, viewer);
         }
     }
 }

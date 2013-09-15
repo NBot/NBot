@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using NBot.Core;
-using NBot.Core.Messaging;
-using NBot.Core.Messaging.Attributes;
+using NBot.Core.Attributes;
+using NBot.Core.Help;
 
 namespace NBot.Plugins
 {
-    public class Sensitive : RecieveMessages
+    public class Sensitive : MessageHandler
     {
         readonly string[] _messages = new[]
                                  {
@@ -21,11 +21,11 @@ namespace NBot.Plugins
                                      "https://p.twimg.com/AoTI6tLCIAAITfB.jpg"
                                  };
 
-
-        [RespondByRegex("\\b(you|u|is)\\b.*(stupid|buggy|useless|dumb|suck|crap|shitty|idiot)")]
-        public void DoHear(IMessage message, IHostAdapter host)
+        [Help(Syntax = "<{0}|{1}> <you|u|is> <stupid|buggy|useless|dumb|suck|crap|shitty|idiot>", Description = "Responds to your mean words with a random retort.", Example = "nbot u suck")]
+        [Respond("\\b(you|u|is)\\b.*(stupid|buggy|useless|dumb|suck|crap|shitty|idiot)")]
+        public void DoHear(Message message, IMessageClient client)
         {
-            host.ReplyTo(message, GetRandomItem(_messages));
+            client.ReplyTo(message, GetRandomItem(_messages));
         }
     }
 }

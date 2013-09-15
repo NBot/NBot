@@ -1,10 +1,10 @@
 ﻿using NBot.Core;
-using NBot.Core.Messaging;
-using NBot.Core.Messaging.Attributes;
+using NBot.Core.Attributes;
+using NBot.Core.Help;
 
 namespace NBot.Plugins
 {
-    public class Hello : RecieveMessages
+    public class Hello : MessageHandler
     {
         private readonly string[] _hellos =
         {
@@ -23,19 +23,21 @@ namespace NBot.Plugins
             "Good 'aye!, {0}"
         };
 
-        [RecieveByRegex("(hello|good( [d'])?ay(e)?)")]
-        public void SayHello(IUserMessage message, IMessageAdapter host)
+        [Help(Syntax = "<hello|good day>", Description = "NBot responds with a friendly greeting", Example = "hello")]
+        [Hear("(hello|good( [d'])?ay(e)?)")]
+        public void SayHello(Message message, IMessageClient client)
         {
-            var user = host.GetUser(message.UserId);
-            host.ReplyTo(message, string.Format(GetRandomItem(_hellos), user.Name));
+            var user = client.GetUser(message.UserId);
+            client.ReplyTo(message, string.Format(GetRandomItem(_hellos), user.Name));
         }
 
 
-        [RecieveByRegex("(^(good )?m(a|o)rnin(g)?)")]
-        public void SayGoodMorning(IUserMessage message, IMessageAdapter host)
+        [Help(Syntax = "<good morning | morning>", Description = "NBot responds with a friendly greeting", Example = "good morning")]
+        [Hear("(^(good )?m(a|o)rnin(g)?)")]
+        public void SayGoodMorning(Message message, IMessageClient client)
         {
-            var user = host.GetUser(message.UserId);
-            host.ReplyTo(message, string.Format(GetRandomItem(_mornings), user.Name));
+            var user = client.GetUser(message.UserId);
+            client.ReplyTo(message, string.Format(GetRandomItem(_mornings), user.Name));
         }
 
     }

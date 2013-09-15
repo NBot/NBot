@@ -4,18 +4,13 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{47C2613C-84DE-4187-9186-959A52D430BC}</ProjectGuid>
+    <ProjectGuid>{DCEA0219-7995-471B-B765-A9E6CE478C41}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>NBot.Core</RootNamespace>
     <AssemblyName>NBot.Core</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <SccProjectName>SAK</SccProjectName>
-    <SccLocalPath>SAK</SccLocalPath>
-    <SccAuxPath>SAK</SccAuxPath>
-    <SccProvider>SAK</SccProvider>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -25,33 +20,27 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>none</DebugType>
+    <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Autofac">
-      <HintPath>..\..\packages\Autofac.3.1.1\lib\net40\Autofac.dll</HintPath>
+    <Reference Include="ServiceStack.Common">
+      <HintPath>..\..\packages\ServiceStack.Common.3.9.59\lib\net35\ServiceStack.Common.dll</HintPath>
     </Reference>
-    <Reference Include="log4net">
-      <HintPath>..\..\packages\log4net.2.0.0\lib\net40-full\log4net.dll</HintPath>
+    <Reference Include="ServiceStack.Interfaces">
+      <HintPath>..\..\packages\ServiceStack.Common.3.9.59\lib\net35\ServiceStack.Interfaces.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <Private>True</Private>
-      <HintPath>..\..\packages\Newtonsoft.Json.5.0.6\lib\net40\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="ServiceStack.Text">
+      <HintPath>..\..\packages\ServiceStack.Text.3.9.59\lib\net35\ServiceStack.Text.dll</HintPath>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Net.Http" />
-    <Reference Include="System.Net.Http.WebRequest" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -59,61 +48,51 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="Topshelf">
-      <HintPath>..\..\packages\TopShelf.3.1.1\lib\net40-full\Topshelf.dll</HintPath>
+      <HintPath>..\..\packages\Topshelf.3.1.1\lib\net40-full\Topshelf.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Attributes\HandleMessageAttribute.cs" />
+    <Compile Include="Attributes\HearAttribute.cs" />
+    <Compile Include="Attributes\RespondAttribute.cs" />
+    <Compile Include="Attributes\MessageTypeAttribute.cs" />
     <Compile Include="Brains\FileBrain.cs" />
     <Compile Include="Brains\IBrain.cs" />
     <Compile Include="Brains\SimpleBrain.cs" />
-    <Compile Include="Extensions\NBotExtensions.cs" />
-    <Compile Include="Extensions\ObjectExtensions.cs" />
-    <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Help\Command.cs" />
     <Compile Include="Help\Help.cs" />
     <Compile Include="Help\HelpAttribute.cs" />
     <Compile Include="Help\HelpInformation.cs" />
-    <Compile Include="HostAdapter.cs" />
-    <Compile Include="IHostAdapter.cs" />
-    <Compile Include="IMessageAdapter.cs" />
-    <Compile Include="IPlugin.cs" />
+    <Compile Include="IPipedMessageHandler.cs" />
+    <Compile Include="IRobotConfiguration.cs" />
+    <Compile Include="IRobotHost.cs" />
+    <Compile Include="IRobot.cs" />
+    <Compile Include="MessageClientExtensions.cs" />
+    <Compile Include="MessageFilterAdapter.cs" />
+    <Compile Include="MessageFilterClient.cs" />
+    <Compile Include="MessageFilterProducer.cs" />
+    <Compile Include="MessageFilters\HandleBarsMessageFilter.cs" />
+    <Compile Include="MessageFilters\IMessageFilter.cs" />
+    <Compile Include="MessageFilters\RegexMessageFilter.cs" />
+    <Compile Include="MessageFilters\RegexReplacementMessageFilter.cs" />
+    <Compile Include="IAdapter.cs" />
+    <Compile Include="Message.cs" />
+    <Compile Include="IMessageRouter.cs" />
+    <Compile Include="IMessageClient.cs" />
+    <Compile Include="IMessageHandler.cs" />
+    <Compile Include="IMessageProducer.cs" />
     <Compile Include="IEntity.cs" />
-    <Compile Include="Messaging\Attributes\HandleMessageAttribute.cs" />
-    <Compile Include="Messaging\Attributes\HandleByTypeAttribute.cs" />
-    <Compile Include="Messaging\Attributes\RecieveByRegexAttribute.cs" />
-    <Compile Include="Messaging\Attributes\RecieveMessageAttribute.cs" />
-    <Compile Include="Messaging\Attributes\RecieveByTypeAttribute.cs" />
-    <Compile Include="Messaging\Attributes\RespondByRegexAttribute.cs" />
-    <Compile Include="Messaging\ContentFilters\BrainDataContentFilter.cs" />
-    <Compile Include="Messaging\ContentFilters\RegexFilter.cs" />
-    <Compile Include="Messaging\ContentFilters\IContentFilter.cs" />
-    <Compile Include="Messaging\ContentFilters\RegexReplacementFilter.cs" />
-    <Compile Include="Messaging\FilteringMessagingService.cs" />
-    <Compile Include="Messaging\GenericMessage.cs" />
-    <Compile Include="Messaging\IHandleMessages.cs" />
-    <Compile Include="Messaging\IMessage.cs" />
-    <Compile Include="Messaging\IMessageRouter.cs" />
-    <Compile Include="Messaging\IMessagingService.cs" />
-    <Compile Include="Messaging\IRecieveMessages.cs" />
-    <Compile Include="Messaging\IUserMessage.cs" />
-    <Compile Include="Messaging\MessageRouter.cs" />
-    <Compile Include="Messaging\MessagingService.cs" />
-    <Compile Include="Messaging\RecieveMessages.cs" />
-    <Compile Include="Messaging\Routes\IRoute.cs" />
-    <Compile Include="Messaging\Routes\MessageTypeRoute.cs" />
-    <Compile Include="Messaging\Routes\RegexRoute.cs" />
-    <Compile Include="Modules\HostModule.cs" />
-    <Compile Include="Modules\Log4NetModule.cs" />
-    <Compile Include="Modules\MessagingModule.cs" />
-    <Compile Include="IMessageFeed.cs" />
-    <Compile Include="NBot.cs" />
+    <Compile Include="MessageHandler.cs" />
+    <Compile Include="MessageRouter.cs" />
+    <Compile Include="Robot.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="NBotHost.cs" />
+    <Compile Include="Routes\IRoute.cs" />
+    <Compile Include="Routes\MessageTypeRoute.cs" />
+    <Compile Include="Routes\RegexRoute.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

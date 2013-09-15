@@ -1,26 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using NBot.Core;
-using NBot.Core.Messaging;
-using NBot.Core.Messaging.Attributes;
+﻿using NBot.Core;
+using NBot.Core.Attributes;
+using NBot.Core.Help;
 
 namespace NBot.Plugins
 {
-    public class FortuneMe : RecieveMessages
+    public class FortuneMe : MessageHandler
     {
-        [RespondByRegex("(fortune)( me)?")]
-        public void GetMyFortune(IMessage message, IHostAdapter host)
+        [Help(Syntax = "<{0}|{1}> fortune [me]",Description = "Displays a forturne", Example = "nbot fortune me")]
+        [Respond("(fortune)( me)?")]
+        public void GetMyFortune(Message message, IMessageClient client)
         {
-            var body = CreateHttpClient("http://www.fortunefortoday.com/getfortuneonly.php")
-                .GetAsync("")
-                .Result
-                .Content
-                .ReadAsStringAsync()
-                .Result;
+            var body = GetJsonServiceClient("http://www.fortunefortoday.com/getfortuneonly.php").Get<string>("/");
 
-            host.ReplyTo(message, body.Trim());
+            client.ReplyTo(message, body.Trim());
         }
 
     }

@@ -1,49 +1,44 @@
 using System;
 using System.Text.RegularExpressions;
 using NBot.Core;
+using NBot.Core.Attributes;
 using NBot.Core.Help;
-using NBot.Core.Messaging;
-using NBot.Core.Messaging.Attributes;
-using log4net;
+using ServiceStack.Service;
 
 namespace NBot.Plugins
 {
-    public class DownForMe : RecieveMessages
+    public class DownForMe : MessageHandler
     {
         private const string DownForMeSite = "http://www.downforeveryoneorjustme.com/";
         private const string SiteIsUpReges = "It's just you";
 
 
-        
-        [RespondByRegex("is (.*) down for you\\??")]
-        [Help(Syntax = "is <site> down for you?",Description = "see if a site is down from the internet.", Example = "nbot is www.google.com down for you?")]
-        public void IsItDownForYou(IMessage message, IHostAdapter host, string[] matches, ILog log)
+        [Respond("is (.*) down for you\\??")]
+        [Help(Syntax = "is <site> down for you?", Description = "see if a site is down from the internet.", Example = "nbot is www.google.com down for you?")]
+        public void IsItDownForYou(Message message, IMessageClient client, string[] matches)
         {
-            DoIsItDownForYou(message, host, matches, log);
+            DoIsItDownForYou(message, client, matches);
         }
 
-        [RespondByRegex("downforyou (.*)")]
+        [Respond("downforyou (.*)")]
         [Help(Syntax = "downforyou <site>", Description = "see if a site is down from the internet.", Example = "nbot downforyou www.google.com")]
-        public void DownForYou(IMessage message, IHostAdapter host, string[] matches, ILog log)
+        public void DownForYou(Message message, IMessageClient client, string[] matches)
         {
-            DoIsItDownForYou(message, host, matches, log);
+            DoIsItDownForYou(message, client, matches);
         }
 
-        private void DoIsItDownForYou(IMessage message, IHostAdapter host, string[] matches, ILog log)
+        private void DoIsItDownForYou(Message message, IMessageClient client, string[] matches)
         {
             try
             {
-                var client = CreateHttpClient(DownForMeSite);
-                string result = client.GetAsync(matches[1]).Result.Content.ReadAsStringAsync().Result;
-
-                var match = Regex.Match(result, SiteIsUpReges);
-
-                host.ReplyTo(message, match.Success ? string.Format("It's just you. {0} is up for me.", matches[1]) : string.Format("Oh no {0} is down for me too!!!!! *PANIC*", matches[1]));
+                IRestClient jsonClient = GetJsonServiceClient(DownForMeSite);
+                var result = jsonClient.Get<string>(matches[1]);
+                Match match = Regex.Match(result, SiteIsUpReges);
+                client.ReplyTo(message, match.Success ? string.Format("It's just you. {0} is up for me.", matches[1]) : string.Format("Oh no {0} is down for me too!!!!! *PANIC*", matches[1]));
             }
             catch (Exception e)
             {
-                host.ReplyTo(message, "Oh no I am Down!!! *UberPanic*");
-                log.Error("Oh no NBot is Down!!!!", e);
+                client.Send("Oh no I am Down!!! *UberPanic*", message.RoomId);
             }
         }
     }

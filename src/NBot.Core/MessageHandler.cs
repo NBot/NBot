@@ -1,14 +1,9 @@
 ﻿using System;
-using System.CodeDom;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Net;
-using System.Security.Cryptography;
-using System.Web;
 using ServiceStack.Service;
 using ServiceStack.ServiceClient.Web;
-using ServiceStack.ServiceHost;
 
 namespace NBot.Core
 {

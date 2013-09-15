@@ -6,6 +6,7 @@ using NBot.Core.Attributes;
 using NBot.Core.Brains;
 using NBot.Core.MessageFilters;
 using NBot.Core.Routes;
+using ServiceStack.Validation;
 
 namespace NBot.Core
 {
@@ -66,23 +67,42 @@ namespace NBot.Core
             try
             {
                 IAdapter adapter = _adapters[message.Channel];
-                IMessageClient client = adapter.Client;
-                
-                foreach (IRoute route in _routes)
+                IMessageClient innerClient = adapter.Client;
+
+                var pipeSegment = message.Content.Split(new[] { '|' }, StringSplitOptions.RemoveEmptyEntries);
+                IMessageClient client = null;
+
+                for (int pipeSegmentIndex = 0; pipeSegmentIndex < pipeSegment.Length; pipeSegmentIndex++)
                 {
-                    if (route.IsMatch(message))
+                    var pipeMessage = message.CloneWithNewContent(pipeSegment[pipeSegmentIndex]);
+                    var pipedMessageClient = client as PipedMessageClient;
+
+                    // Replace the input to the next command with the output of the previous
+                    if (pipedMessageClient != null)
                     {
-                        MethodInfo endpoint = route.EndPoint;
-                        endpoint.Invoke(route.Handler, BuildParameters(endpoint, message, client, route.GetMatchMetaData(message)));
+                        var content = pipedMessageClient.ReplaceInput(pipeMessage.Content.Trim());
+                        pipeMessage = pipeMessage.CloneWithNewContent(content);
+                    }
+
+                    client = pipeSegmentIndex == pipeSegment.Length - 1 ? innerClient : new PipedMessageClient(innerClient);
+
+                    foreach (IRoute route in _routes)
+                    {
+                        if (route.IsMatch(pipeMessage))
+                        {
+                            MethodInfo endpoint = route.EndPoint;
+                            endpoint.Invoke(route.Handler, BuildParameters(endpoint, pipeMessage, client, route.GetMatchMetaData(pipeMessage)));
+                        }
                     }
                 }
+
+
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
             }
         }
-
 
         private object[] BuildParameters(MethodInfo method, Message message, IMessageClient client, string[] metaData)
         {
@@ -111,10 +131,6 @@ namespace NBot.Core
                 {
                     result[parameterIndex] = _brain;
                 }
-                //else
-                //{
-                //    result[parameterIndex] = _container.Resolve(parameter.ParameterType);
-                //}
             }
 
             return result;

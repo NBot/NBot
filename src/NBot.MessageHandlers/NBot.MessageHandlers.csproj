@@ -53,6 +53,7 @@
     <Compile Include="Akbar.cs" />
     <Compile Include="Announce.cs" />
     <Compile Include="AsciiMe.cs" />
+    <Compile Include="BotSnack.cs" />
     <Compile Include="CalmDown.cs">
       <SubType>Code</SubType>
     </Compile>

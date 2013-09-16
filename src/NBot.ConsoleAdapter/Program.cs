@@ -19,6 +19,7 @@ namespace NBot.ConsoleAdapter
                 .RegisterHandler(new Akbar())
                 .RegisterHandler(new Announce())
                 .RegisterHandler(new AsciiMe())
+                .RegisterHandler(new BotSnack())
                 .RegisterHandler(new CalmDown())
                 .RegisterHandler(new ChuckNorris())
                 .RegisterHandler(new DownForMe())

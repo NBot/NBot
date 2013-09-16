@@ -16,7 +16,8 @@ NBot is a "port" of git hub's Hubot but targeted at the .NET platform. It acts a
 4. Create Message Filters
 
 ## Open Source Dependencies
-1. [ServiceStack.Common](https://github.com/ServiceStack/ServiceStack)
+1. [Top Shelf](https://github.com/phatboyg/Topshelf)
+2. [ServiceStack.Common](https://github.com/ServiceStack/ServiceStack)
 2. [ServiceStack.Text](https://github.com/ServiceStack/ServiceStack.Text)
 3. [ServiceStack.Interfaces](https://github.com/ServiceStack/ServiceStack)
 

@@ -59,10 +59,6 @@
       <Project>{e0892510-92c5-44a1-a33e-2cbd0ad96e0e}</Project>
       <Name>NBot.MessageHandlers</Name>
     </ProjectReference>
-    <ProjectReference Include="D:\Repositories\Git\NBot III\src\NBot.CampfireAdapter\NBot.CampfireAdapter.csproj">
-      <Project>{BC069E29-05CF-4842-B953-E935F59FA372}</Project>
-      <Name>NBot.CampfireAdapter</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

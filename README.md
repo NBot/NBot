@@ -23,8 +23,8 @@ NBot is a "port" of git hub's Hubot but targeted at the .NET platform. It acts a
 
 ## Getting Started
 Creating your first plugin.
-* Create a class and inherit from RecieveMessages.
-* Add a method with an attribute RecieveByRegex.
+* Create a class and inherit from MessageHandler.
+* Add a method with an attribute "Hear".
 * The parameters are added as needed and are injected when the types are known.
 * Do some logic.
 * Reply if you like.

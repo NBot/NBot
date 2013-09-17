@@ -12,7 +12,7 @@ NBot is a "port" of git hub's Hubot but targeted at the .NET platform. It acts a
 ## Want to contribute?
 1. Create wiki pages
 2. Create [Message Handlers](https://github.com/NBot/NBot/wiki/Message-Handler)
-3. Create Adapters
+3. Create [Adapters](https://github.com/NBot/NBot/wiki/_preview)
 4. Create Message Filters
 
 ## Open Source Dependencies

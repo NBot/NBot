@@ -5,10 +5,10 @@ namespace NBot.ConsoleAdapter
 {
     public class ConsoleTestHandler : IMessageHandler
     {
-        [Hear("^echo (.*)")]
-        public void HandleMessaeg(Message message, IMessageClient client, string[] matches)
+        [Hear("^echo {{input}}")]
+        public void HandleMessaeg(Message message, IMessageClient client, string input)
         {
-            client.Send(matches[1], message.RoomId);
+            client.Send(input, message.RoomId);
         }
     }
 }

@@ -7,13 +7,13 @@ namespace NBot.MessageHandlers
 {
     public class Ping : MessageHandler
     {
-        [Respond("ping( me)? (.*)")]
-        [Help(Syntax = "ping <me> <site/ip address>",Description = "Ping ip address", Example = "ping me www.google.com")]
-        public void PingMe(Message message, IMessageClient client, string[] matches)
+        [Respond("ping( me)? {{location}}")]
+        [Help(Syntax = "ping <me> <site/ip address>", Description = "Ping ip address", Example = "ping me www.google.com")]
+        public void PingMe(Message message, IMessageClient client, string location)
         {
             var startInfo = new ProcessStartInfo();
             startInfo.FileName = "ping.exe";
-            startInfo.Arguments = matches.Length == 2 ? matches[1] : matches[2];
+            startInfo.Arguments = location;
             startInfo.RedirectStandardOutput = true;
             startInfo.UseShellExecute = false;
             var process = Process.Start(startInfo);

@@ -11,63 +11,72 @@ namespace NBot.MessageHandlers
         [Help(Syntax = "Brace yourself <text>",
             Description = "Ned Stark braces for <text>",
             Example = "Brace yourself users")]
-        [Respond("brace yourself (.+)")]
-        public void BraceYourself(Message message, IMessageClient client, string[] matches)
+        [Respond("brace yourself {{caption}}")]
+        public void BraceYourself(Message message, IMessageClient client, string caption)
         {
-            MemGen(message, client, "http://i.imgur.com/cOnPlV7.jpg", "Brace Yourself", matches[1]);
+            MemGen(message, client, "http://i.imgur.com/cOnPlV7.jpg", "Brace Yourself", caption);
         }
 
         [Help(Syntax = "All your <text> are belong to <text>",
             Description = "All your <text> are belong to <text>",
             Example = "All your bases are belong to us")]
-        [Respond("(All your .*) (are belong to .*)")]
-        public void AllYourBelongTo(Message message, IMessageClient client, string[] matches)
+        [Respond("(All your {{thing}}) (are belong to {{someone}})")]
+        public void AllYourBelongTo(Message message, IMessageClient client, string thing, string someone)
         {
-            MemGen(message, client, "http://i.imgur.com/gzPiQ8R.jpg", matches[1], matches[2]);
+            MemGen(message, client, "http://i.imgur.com/gzPiQ8R.jpg", string.Format("All your {0}", thing), string.Format("are belong to {0}", someone));
         }
 
         [Help(Syntax = "<text> ALL the <things>",
             Description = "Generates ALL THE THINGS",
             Example = "Automate ALL the Things")]
-        [Respond("(.*) (ALL the .*)")]
-        public void AllTheThings(Message message, IMessageClient client, string[] matches)
+        [Respond("{{action}} (ALL the {{things}})")]
+        public void AllTheThings(Message message, IMessageClient client, string action, string things)
         {
-            MemGen(message, client, "http://memecaptain.com/all_the_things.jpg", matches[1], matches[2]);
+            MemGen(message, client, "http://memecaptain.com/all_the_things.jpg", action, string.Format("ALL the {0}", things));
         }
 
         [Help(Syntax = "I don't always <something> but when i do <text>",
             Description = "Generates The Most Interesting man in the World",
             Example = "I don't always debug but when i do its in production")]
-        [Respond("(I DON'?T ALWAYS .*) (BUT WHEN I DO,? .*)")]
-        public void DontAlways(Message message, IMessageClient client, string[] matches)
+        [Respond("(I DON'?T ALWAYS {{something}}) (BUT WHEN I DO,? {{how}})")]
+        public void DontAlways(Message message, IMessageClient client, string something, string how)
         {
-            MemGen(message, client, "http://memecaptain.com/most_interesting.jpg", matches[1], matches[2]);
+            MemGen(message, client, "http://memecaptain.com/most_interesting.jpg", string.Format("I DON'?T ALWAYS {0}", something), string.Format("BUT WHEN I DO,? {0}", how));
         }
 
         [Help(Syntax = "Y U NO <text>",
             Description = "Generates the Y U NO GUY with the bottom caption of <text>",
             Example = "Y U NO Connex")]
-        [Respond("Y U NO (.+)")]
-        public void WhyYouNo(Message message, IMessageClient client, string[] matches)
+        [Respond("Y U NO {{doSomething}}")]
+        public void WhyYouNo(Message message, IMessageClient client, string doSomething)
         {
-            MemGen(message, client, "http://memecaptain.com/y_u_no.jpg", "Y U NO", matches[1]);
+            MemGen(message, client, "http://memecaptain.com/y_u_no.jpg", "Y U NO", doSomething);
+        }
+
+        [Help(Syntax = "<text> (NAILED IT)",
+            Description = "Generates success kid with the top caption of <text>",
+            Example = "Jonathan NAILED IT")]
+        [Respond("{{topCaption}} (NAILED IT)")]
+        public void NailedIt(Message message, IMessageClient client, string topCaption)
+        {
+            MemGen(message, client, "http://memecaptain.com/success_kid.jpg", topCaption, "NAILED IT");
         }
 
         [Help(Syntax = "<text> (SUCCESS|NAILED IT)",
-            Description = "Generates success kid with the top caption of <text>",
-            Example = "Jonathan NAILED IT")]
-        [Respond("(.*)(SUCCESS|NAILED IT.*)")]
-        public void NailedIt(Message message, IMessageClient client, string[] matches)
+    Description = "Generates success kid with the top caption of <text>",
+    Example = "Jonathan Success")]
+        [Respond("{{topCaption}} (SUCCESS)")]
+        public void Success(Message message, IMessageClient client, string topCaption)
         {
-            MemGen(message, client, "http://memecaptain.com/success_kid.jpg", matches[1], matches[2]);
+            MemGen(message, client, "http://memecaptain.com/success_kid.jpg", topCaption, "SUCCESS");
         }
 
         private void MemGen(Message message, IMessageClient client, string urlString, string text1, string text2)
         {
             try
             {
-                var result = GetJsonServiceClient(string.Format("http://memecaptain.com/g?u={0}&t1={1}&t2={2}", urlString, text1, text2))
-                    .Get<string>("/");
+                var result = GetJsonServiceClient(string.Format("http://memecaptain.com/g?u={0}&t1={1}&t2={2}", UrlEncode(urlString), UrlEncode(text1), UrlEncode(text2)))
+                    .Get<string>("");
 
                 string startOfUrl = result.Substring(result.IndexOf("http"));
                 string imgUrl = startOfUrl.Substring(0, startOfUrl.IndexOf("\""));

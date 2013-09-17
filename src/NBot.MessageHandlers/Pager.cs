@@ -13,11 +13,10 @@ namespace NBot.MessageHandlers
         [Help(Syntax = "page <User>",
             Description = "This command will search all rooms for the specified user and let them know you need to speak with them.",
             Example = "page Jon")]
-        [Respond("page (.*)")]
-        public void PageUser(Message message, IMessageClient client, string[] matches)
+        [Respond("page {{name}}")]
+        public void PageUser(Message message, IMessageClient client, string name)
         {
-            string name = matches[1];
-            string regex = string.Format("(.*)({0})(.*)", matches[1]);
+            string regex = string.Format("(.*)({0})(.*)", name);
             List<IEntity> rooms = client.GetAllRooms().ToList();
 
             string sentFrom = client.GetUser(message.UserId).Name;

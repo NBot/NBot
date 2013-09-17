@@ -4,6 +4,7 @@ using NBot.Core.Routes;
 
 namespace NBot.Core.Attributes
 {
+    [AttributeUsage(AttributeTargets.Method, AllowMultiple = true)]
     public class RespondAttribute : HandleMessageAttribute
     {
         private readonly string _pattern;

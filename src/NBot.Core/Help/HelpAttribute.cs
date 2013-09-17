@@ -3,7 +3,7 @@ using System.Security.Cryptography;
 
 namespace NBot.Core.Help
 {
-    [AttributeUsage(AttributeTargets.Method)]
+    [AttributeUsage(AttributeTargets.Method,AllowMultiple = true)]
     public class HelpAttribute : Attribute
     {
         public HelpAttribute()

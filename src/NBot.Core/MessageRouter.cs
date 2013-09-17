@@ -91,7 +91,7 @@ namespace NBot.Core
                         if (route.IsMatch(pipeMessage))
                         {
                             MethodInfo endpoint = route.EndPoint;
-                            endpoint.Invoke(route.Handler, BuildParameters(endpoint, pipeMessage, client, route.GetMatchMetaData(pipeMessage)));
+                            endpoint.Invoke(route.Handler, BuildParameters(endpoint, pipeMessage, client, route.GetInputParameters(pipeMessage)));
                         }
                     }
                 }
@@ -104,7 +104,7 @@ namespace NBot.Core
             }
         }
 
-        private object[] BuildParameters(MethodInfo method, Message message, IMessageClient client, string[] metaData)
+        private object[] BuildParameters(MethodInfo method, Message message, IMessageClient client, Dictionary<string, string> inputParameters)
         {
             ParameterInfo[] methodParameters = method.GetParameters();
             var result = new object[methodParameters.Count()];
@@ -117,12 +117,6 @@ namespace NBot.Core
                 {
                     result[parameterIndex] = message;
                 }
-                else if (parameter.ParameterType == typeof(string[])
-                         && (parameter.Name == "matches"
-                             || parameter.Name == "metadata"))
-                {
-                    result[parameterIndex] = metaData;
-                }
                 else if (parameter.ParameterType == typeof(IMessageClient))
                 {
                     result[parameterIndex] = client;
@@ -130,6 +124,10 @@ namespace NBot.Core
                 else if (parameter.ParameterType == typeof(IBrain))
                 {
                     result[parameterIndex] = _brain;
+                }
+                else if (inputParameters.ContainsKey(parameter.Name))
+                {
+                    result[parameterIndex] = Convert.ChangeType(inputParameters[parameter.Name], parameter.ParameterType);
                 }
             }
 

@@ -13,17 +13,16 @@ namespace NBot.MessageHandlers
         [Help(Syntax = "chuck norris me <Optional: Name>",
             Description = "When the command is issued, a Chuck Norris joke will be returned. If a name is provided, it will replace 'Chuck Norris' with the name provided.",
             Example = "chuck norris me John")]
-        [Respond("(chuck norris)( me )?(.*)")]
-        public void ChuckNorrisJoke(Message message, IMessageClient client, string[] matches)
+        [Respond("(chuck norris)( me)?{{name}}")]
+        public void ChuckNorrisJoke(Message message, IMessageClient client, string name)
         {
             IRestClient jsonClient = GetJsonServiceClient("http://api.icndb.com/jokes/");
 
             RootObject result;
 
-            if (matches.Count() == 4)
+            if (!string.IsNullOrEmpty(name))
             {
-                string user = matches[3];
-                result = jsonClient.Get<string>("random?firstName=" + user + "&lastName=").FromJson<RootObject>();
+                result = jsonClient.Get<string>("random?firstName=" + name + "&lastName=").FromJson<RootObject>();
             }
             else
             {

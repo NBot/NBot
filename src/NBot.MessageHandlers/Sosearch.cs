@@ -13,8 +13,8 @@ namespace NBot.MessageHandlers
         [Help(Syntax = "sosearch <Search String>",
             Description = "This command will search StackOverflow.com for the provided search string and return the top five results by response count.",
             Example = "sosearch mvc")]
-        [Respond("(sosearch|so me)(.*)")]
-        public void SearchStackOverflow(Message message, IMessageClient client, string[] matches)
+        [Respond("(sosearch) {{query}}")]
+        public void SearchStackOverflow(Message message, IMessageClient client, string query)
         {
             try
             {
@@ -24,13 +24,13 @@ namespace NBot.MessageHandlers
                     throw new ArgumentException("Please supply the StackappsApiKey");
 
                 var result = GetGZipedJsonServiceClient(string.Format("http://api.stackoverflow.com/1.1/search?intitle={0}&key={1}",
-                                                                Uri.EscapeDataString(matches[2]),
+                                                                Uri.EscapeDataString(query),
                                                                 Uri.EscapeDataString(authCode)))
                                                                 .Get<SearchResult>("/");
 
                 if (result.Questions.Any())
                 {
-                    client.ReplyTo(message, string.Format("Top 5 Search results for: {0}", matches[2]));
+                    client.ReplyTo(message, string.Format("Top 5 Search results for: {0}", query));
 
                     foreach (Question question in result.Questions.OrderByDescending(q => q.answer_count).Take(5))
                     {
@@ -39,7 +39,7 @@ namespace NBot.MessageHandlers
                 }
                 else
                 {
-                    client.ReplyTo(message, string.Format("No results found for {0}", matches[2]));
+                    client.ReplyTo(message, string.Format("No results found for {0}", query));
                 }
             }
             catch (Exception ex)

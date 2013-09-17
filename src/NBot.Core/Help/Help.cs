@@ -16,38 +16,20 @@ namespace NBot.Core.Help
             _helpInformation = helpInformation;
         }
 
-        [Respond("(help|commands)(.*)")]
-        public void HelpCommand(Message message, IMessageClient client, string[] matches)
-        {
-            try
-            {
-                if (matches.Count() <= 2)
-                {
-                    MainHelpMenu(message, client);
-                }
-                else
-                {
-                    PluginHelp(message, client, matches[2]);
-                }
-            }
-            catch (Exception ex)
-            {
-                client.ReplyTo(message, "The Help plugin blew up. We're all in trouble now!");
-            }
-        }
-
-        private void MainHelpMenu(Message message, IMessageClient client)
+        [Respond("(help|commands)")]
+        public void MainHelpMenu(Message message, IMessageClient client)
         {
             string response = _helpInformation.Aggregate("List of Plugins. Please use help <plugin> for more information.", (current, helpInformation) => current + ("\n\t-" + helpInformation.Plugin));
             client.ReplyTo(message, response);
         }
 
-        private void PluginHelp(Message message, IMessageClient client, string plugIn)
+        [Respond("(help|commands) {{plugin}}")]
+        public void PluginHelp(Message message, IMessageClient client, string plugin)
         {
-            string ouputMessage = string.Format("Commands for {0}:", plugIn);
-            IEnumerable<List<Command>> helpInformationCommands = _helpInformation.Where(hi => hi.Plugin.ToLower() == plugIn.ToLower()).Select(hi => hi.Commands);
+            string ouputMessage = string.Format("Commands for {0}:", plugin);
+            IEnumerable<List<Command>> helpInformationCommands = _helpInformation.Where(hi => hi.Plugin.ToLower() == plugin.ToLower()).Select(hi => hi.Commands);
 
-            foreach (var commands in _helpInformation.Where(hi => hi.Plugin.ToLower() == plugIn.ToLower()).Select(hi => hi.Commands))
+            foreach (var commands in _helpInformation.Where(hi => hi.Plugin.ToLower() == plugin.ToLower()).Select(hi => hi.Commands))
             {
                 foreach (Command command in commands)
                 {
@@ -57,7 +39,7 @@ namespace NBot.Core.Help
 
             client.ReplyTo(message, helpInformationCommands.Any()
                                       ? ouputMessage
-                                      : string.Format("Plugin '{0}' not found.", plugIn));
+                                      : string.Format("Plugin '{0}' not found.", plugin));
         }
     }
 }

@@ -10,7 +10,6 @@ namespace NBot.ConsoleAdapter
         private static void Main(string[] args)
         {
             var brain = new FileBrain(".\\Brain");
-
             Robot.Create("NBot")
                 .UseBrain(brain)
                 .RegisterMessageFilter(new HandleBarsMessageFilter(brain))
@@ -22,6 +21,7 @@ namespace NBot.ConsoleAdapter
                 .RegisterHandler(new BotSnack())
                 .RegisterHandler(new CalmDown())
                 .RegisterHandler(new ChuckNorris())
+                .RegisterHandler(new ConsoleTestHandler())
                 .RegisterHandler(new DownForMe())
                 .RegisterHandler(new ExcuseMe())
                 .RegisterHandler(new FacePalm())
@@ -32,8 +32,10 @@ namespace NBot.ConsoleAdapter
                 .RegisterHandler(new Ping())
                 .RegisterHandler(new Remember())
                 .RegisterHandler(new Sensitive())
+                .RegisterHandler(new Sosearch())                
                 .RegisterHandler(new Swanson())
                 .Run();
+
         }
     }
 }

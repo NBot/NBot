@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Reflection;
 
 namespace NBot.Core.Routes
@@ -24,9 +25,9 @@ namespace NBot.Core.Routes
             return message.Type == _messageType;
         }
 
-        public string[] GetMatchMetaData(Message message)
+        public Dictionary<string, string> GetInputParameters(Message message)
         {
-            return new[] {message.GetType().Name};
+            return new Dictionary<string, string>();
         }
 
         #endregion

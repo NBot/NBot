@@ -11,10 +11,9 @@ namespace NBot.MessageHandlers
         [Help(Syntax = "ascii me <Phrase>",
             Description = "Given the input phrase, an ASCII drawing will be returned for that phrase.",
             Example = "ascii me Hello")]
-        [Respond("ascii( me)? (.+)")]
-        public void GetAscii(Message message, IMessageClient client, string[] matches)
+        [Respond("ascii( me)? {{query}}")]
+        public void GetAscii(Message message, IMessageClient client, string query)
         {
-            string query = matches[2];
             IRestClient httpClient = GetJsonServiceClient("http://asciime.heroku.com/");
             var result = httpClient.Get<string>("/generate_ascii?s={0}".FormatWith(query));
             client.ReplyTo(message, result);

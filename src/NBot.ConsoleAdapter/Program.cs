@@ -1,4 +1,5 @@
-﻿using NBot.Core;
+﻿using System.Collections.Generic;
+using NBot.Core;
 using NBot.Core.Brains;
 using NBot.Core.Messaging.ContentFilters;
 using NBot.MessageHandlers;
@@ -32,7 +33,7 @@ namespace NBot.ConsoleAdapter
                 .RegisterHandler(new Ping())
                 .RegisterHandler(new Remember())
                 .RegisterHandler(new Sensitive())
-                .RegisterHandler(new Sosearch())                
+                .RegisterHandler(new Sosearch())
                 .RegisterHandler(new Swanson())
                 .Run();
 

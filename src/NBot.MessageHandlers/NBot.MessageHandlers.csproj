@@ -75,6 +75,7 @@
     <Compile Include="MemeGenerator.cs" />
     <Compile Include="Pager.cs" />
     <Compile Include="Ping.cs" />
+    <Compile Include="PowerShell.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Remember.cs" />
     <Compile Include="Sensitive.cs" />

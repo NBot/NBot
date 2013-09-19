@@ -60,6 +60,7 @@
     <Compile Include="ChuckNorris.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="PirateTranslator.cs" />
     <Compile Include="Status.cs" />
     <Compile Include="DownForMe.cs">
       <SubType>Code</SubType>

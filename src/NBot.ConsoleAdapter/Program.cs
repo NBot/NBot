@@ -32,7 +32,8 @@ namespace NBot.ConsoleAdapter
                 .RegisterHandler(new Ping())
                 .RegisterHandler(new Remember())
                 .RegisterHandler(new Sensitive())
-                .RegisterHandler(new Sosearch())                
+                .RegisterHandler(new Sosearch())
+                .RegisterHandler(new Status())
                 .RegisterHandler(new Swanson())
                 .Run();
 

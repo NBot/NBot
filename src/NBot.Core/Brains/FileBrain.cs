@@ -55,6 +55,22 @@ namespace NBot.Core.Brains
             }
         }
 
+        public void RemoveKey(string key)
+        {
+            lock (_locker)
+            {
+                if (_cache.ContainsKey(key))
+                {
+                    _cache.Remove(key);
+                }
+
+                if (File.Exists(GetKeyFile(key)))
+                {
+                    File.Delete(GetKeyFile(key));
+                }
+            }
+        }
+
         #endregion
 
         private void SetKeyValue(string key, object value)

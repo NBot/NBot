@@ -23,6 +23,14 @@ namespace NBot.Core.Brains
             return _memory.ContainsKey(key);
         }
 
+        public void RemoveKey(string key)
+        {
+            if (_memory.ContainsKey(key))
+            {
+                _memory.Remove(key);
+            }
+        }
+
         #endregion
     }
 }

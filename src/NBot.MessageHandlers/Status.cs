@@ -33,8 +33,8 @@ namespace NBot.MessageHandlers
         }
 
         [Help(Syntax = "{{userName}} status",
-            Description = "Tells you the status of {{userName}}",
-            Example = "Hillary Cliton status")]
+            Description = "Tells you the status of user",
+            Example = "Hillary Clinton status")]
         [Respond("{{userName}} status")]
         public void HandleGetStatus(Message message, IMessageClient client, IBrain brain, string userName)
         {
@@ -82,10 +82,10 @@ namespace NBot.MessageHandlers
         public void Hear(Message message, IMessageClient client, IBrain brain)
         {
             string time = DateTime.Now.ToShortDateString() + " " + DateTime.Now.ToShortTimeString();
-
             string result = time + " in the room " + message.RoomId;
+            var userName = client.GetUser(message.UserId).Name;
 
-            brain.SetValue(LastSpokeKey(message.UserId), result);
+            brain.SetValue(LastSpokeKey(userName), result);
         }
 
 

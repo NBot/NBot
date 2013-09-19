@@ -67,36 +67,45 @@ namespace NBot.Core
             try
             {
                 IAdapter adapter = _adapters[message.Channel];
-                IMessageClient innerClient = adapter.Client;
+                var pipeline = message.Content.Split(new[] { '|' }, StringSplitOptions.RemoveEmptyEntries);
 
-                var pipeSegment = message.Content.Split(new[] { '|' }, StringSplitOptions.RemoveEmptyEntries);
                 IMessageClient client = null;
+                string[] previousSegmentOutput = new string[] { };
 
-                for (int pipeSegmentIndex = 0; pipeSegmentIndex < pipeSegment.Length; pipeSegmentIndex++)
+                for (int segmentIndex = 0; segmentIndex < pipeline.Length; segmentIndex++)
                 {
-                    var pipeMessage = message.CloneWithNewContent(pipeSegment[pipeSegmentIndex]);
+                    var segment = message.CloneWithNewContent(pipeline[segmentIndex]);
                     var pipedMessageClient = client as PipedMessageClient;
 
                     // Replace the input to the next command with the output of the previous
                     if (pipedMessageClient != null)
                     {
-                        var content = pipedMessageClient.ReplaceInput(pipeMessage.Content.Trim());
-                        pipeMessage = pipeMessage.CloneWithNewContent(content);
+                        var content = pipedMessageClient.ReplaceInput(segment.Content.Trim());
+                        previousSegmentOutput = pipedMessageClient.Output;
+                        segment = segment.CloneWithNewContent(content);
                     }
 
-                    client = pipeSegmentIndex == pipeSegment.Length - 1 ? innerClient : new PipedMessageClient(innerClient);
+                    client = segmentIndex == pipeline.Length - 1 ? adapter.Client : new PipedMessageClient(adapter.Client);
 
-                    foreach (IRoute route in _routes)
+
+                    foreach (var route in _routes.Where(r => r.IsMatch(segment)))
                     {
-                        if (route.IsMatch(pipeMessage))
+                        Dictionary<string, string> inputParameters = new Dictionary<string, string>();
+
+                        if (route is IMessageParameterProvider)
                         {
-                            MethodInfo endpoint = route.EndPoint;
-                            endpoint.Invoke(route.Handler, BuildParameters(endpoint, pipeMessage, client, route.GetInputParameters(pipeMessage)));
+                            inputParameters = ((IMessageParameterProvider)route).GetInputParameters(segment);
                         }
+                        else if (route is IPipedParameterProvider)
+                        {
+                            inputParameters = ((IPipedParameterProvider)route).GetInputParameters(previousSegmentOutput);
+                        }
+
+                        var routeParameters = BuildParameters(route.EndPoint, segment, client, inputParameters);
+                        route.EndPoint.Invoke(route.Handler, routeParameters);
                     }
+
                 }
-
-
             }
             catch (Exception e)
             {

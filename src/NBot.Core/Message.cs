@@ -19,7 +19,7 @@ namespace NBot.Core
                 RoomId = RoomId,
                 UserId = UserId,
                 Type = Type,
-                Content = content
+                Content = content.Trim()
             };
         }
     }

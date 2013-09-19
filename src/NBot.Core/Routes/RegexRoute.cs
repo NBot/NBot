@@ -6,7 +6,7 @@ using System.Text.RegularExpressions;
 
 namespace NBot.Core.Routes
 {
-    public class RegexRoute : IRoute
+    public class RegexRoute : IRoute, IMessageParameterProvider
     {
         private readonly string _pattern;
         private const string RegexParameterPattern = "{{(?<name>\\w+)}}";

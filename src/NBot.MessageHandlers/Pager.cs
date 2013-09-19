@@ -14,6 +14,7 @@ namespace NBot.MessageHandlers
             Description = "This command will search all rooms for the specified user and let them know you need to speak with them.",
             Example = "page Jon")]
         [Respond("page {{name}}")]
+        [PipedCommand("page", "name")]
         public void PageUser(Message message, IMessageClient client, string name)
         {
             string regex = string.Format("(.*)({0})(.*)", name);

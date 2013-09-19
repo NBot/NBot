@@ -21,6 +21,7 @@ namespace NBot.MessageHandlers
         Description = "The provided messsage will be broadcast to all rooms.",
         Example = "announce raw Hello Everyone!")]
         [Respond("announce raw \"?{{announcement}}\"?")]
+        [PipedCommand("announce", "announcement")]
         public void RoomAnnounceRaw(Message message, IMessageClient client, string announcement)
         {
             client.Broadcast(announcement);

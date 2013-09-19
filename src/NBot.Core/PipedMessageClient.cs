@@ -10,7 +10,9 @@ namespace NBot.Core
     public class PipedMessageClient : IMessageClient
     {
         private readonly IMessageClient _innerClient;
-        private readonly SortedSet<object> _output = new SortedSet<object>();
+        private readonly SortedSet<string> _output = new SortedSet<string>();
+
+        public string[] Output { get { return _output.ToArray(); } }
 
         public PipedMessageClient(IMessageClient innerClient)
         {

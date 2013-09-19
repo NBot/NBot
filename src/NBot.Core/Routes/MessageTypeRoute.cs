@@ -4,7 +4,7 @@ using System.Reflection;
 
 namespace NBot.Core.Routes
 {
-    public class MessageTypeRoute : IRoute
+    public class MessageTypeRoute : IRoute, IMessageParameterProvider
     {
         private readonly string _messageType;
 

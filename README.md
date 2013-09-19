@@ -34,7 +34,7 @@ Creating your first plugin.
  public class HelloNBot : MessageHandler {
 
     [Hear("Hello NBot")]
-    public void DoHelloNBot(Message message, IMessagingClient client){
+    public void HandleHello(Message message, IMessagingClient client){
         IEntity user = client.GetUser(message.UserId);
         client.ReplyTo(message, string.Format("Hi {0}, how are you?",user.Name));
     }

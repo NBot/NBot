@@ -16,7 +16,7 @@ namespace NBot.Core.Routes
         {
             string parameterizedPattern = Regex.Replace(pattern, RegexParameterPattern, match => "(?<" + match.Groups["name"].Value + ">.*)");
 
-            _regex = new Regex(parameterizedPattern, RegexOptions.IgnorePatternWhitespace);
+            _regex = new Regex(parameterizedPattern, RegexOptions.IgnoreCase);
 
             Handler = handler;
             EndPoint = endPoint;

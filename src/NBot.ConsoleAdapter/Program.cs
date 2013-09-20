@@ -23,6 +23,7 @@ namespace NBot.ConsoleAdapter
                 .RegisterHandler(new CalmDown())
                 .RegisterHandler(new ChuckNorris())
                 .RegisterHandler(new ConsoleTestHandler())
+                .RegisterHandler(new Dice())
                 .RegisterHandler(new DownForMe())
                 .RegisterHandler(new ExcuseMe())
                 .RegisterHandler(new FacePalm())

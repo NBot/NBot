@@ -42,6 +42,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -61,6 +62,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="PirateTranslator.cs" />
+    <Compile Include="PityMe.cs" />
     <Compile Include="Status.cs" />
     <Compile Include="DownForMe.cs">
       <SubType>Code</SubType>

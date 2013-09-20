@@ -33,11 +33,26 @@ namespace NBot.MessageHandlers
         [Respond("pity( me)?( {{phrase}})?")]
         public void PityTheFool(Message message, IMessageClient client, string phrase)
         {
-            var pity = GetRandomPityStyle();
+            var pity = GetRandomItem(new List<string>
+                {
+                    "I Pity The Fool",
+                    "Pity The Fool",
+                    "Thou Shalt pity the fool",
+                    "Pity thee",
+                    "Be pitiful for those",
+                    "cast pity towards those"
+                });
 
             if (string.IsNullOrEmpty(phrase))
             {
-                phrase = GetRandomPity();
+                phrase = GetRandomItem(new List<string>
+                    {
+                        "who breaks the build",
+                        "who doesn't test before check-in",
+                        "who is last to the dessert tray",
+                        "who doesn't login to campfire",
+                        "who isn't nBot"
+                    });
             }
 
             MemeGen(message, client, "1646", "5353", pity, phrase);
@@ -53,7 +68,7 @@ namespace NBot.MessageHandlers
         }
 
         [Help(Syntax = "insanity <Phrase 1>, <Phrase 2>",
-            Description = "Given the input phrases, a insanity wolf will be returned.",
+            Description = "Given the input phrases, an insanity wolf will be returned.",
             Example = "insanity rob a bank, burn the money")]
         [Respond("insanity( me)?( {{phrase1}})?(, {{phrase2}}?)")]
         public void InsanityWolf(Message message, IMessageClient client, string phrase1, string phrase2)
@@ -75,39 +90,6 @@ namespace NBot.MessageHandlers
             var response = httpClient.Get<MemeGeneratorResponse>("");
 
             client.ReplyTo(message, response.Result.InstanceImageUrl);
-        }
-
-        internal string GetRandomPityStyle()
-        {
-            var pityVernaculars = new List<string>
-                {
-                    "I Pity The Fool",
-                    "Pity The Fool",
-                    "Thou Shalt pity the fool",
-                    "Pity thee",
-                    "Be pitiful for those",
-                    "cast pity towards those"
-                };
-
-            var pity = GetRandomItem(pityVernaculars);
-
-            return pity;
-        }
-
-        internal string GetRandomPity()
-        {
-            var thingsToPity = new List<string>
-                {
-                    "who breaks the build",
-                    "who doesn't test before check-in",
-                    "who is last to the dessert tray",
-                    "who doesn't login to campfire",
-                    "who isn't nBot"
-                };
-
-            var thingToPity = GetRandomItem(thingsToPity);
-
-            return thingToPity;
         }
             
         [DataContract]

@@ -6,7 +6,7 @@ using NBot.Core.Help;
 
 namespace NBot.MessageHandlers
 {
-    public class MemeGenerator : MessageHandler
+    public class MemeCaptain : MessageHandler
     {
         [Help(Syntax = "Brace yourself <text>",
             Description = "Ned Stark braces for <text>",
@@ -84,7 +84,7 @@ namespace NBot.MessageHandlers
             }
             catch (Exception ex)
             {
-                EventLog.WriteEntry("NBot-MemeGenerator", ex.ToString());
+                EventLog.WriteEntry("NBot-MemeCaptain", ex.ToString());
                 client.ReplyTo(message, "MemGenerator crashed!");
             }
         }

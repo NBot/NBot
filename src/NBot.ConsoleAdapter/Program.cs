@@ -28,7 +28,7 @@ namespace NBot.ConsoleAdapter
                 .RegisterHandler(new FacePalm())
                 .RegisterHandler(new FortuneMe())
                 .RegisterHandler(new Hello())
-                .RegisterHandler(new MemeGenerator())
+                .RegisterHandler(new MemeCaptain())
                 .RegisterHandler(new Pager())
                 .RegisterHandler(new PirateTranslator())
                 .RegisterHandler(new Ping())

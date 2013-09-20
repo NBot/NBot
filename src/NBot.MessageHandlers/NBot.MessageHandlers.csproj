@@ -76,7 +76,7 @@
     <Compile Include="FortuneMe.cs" />
     <Compile Include="Hello.cs" />
     <Compile Include="JoinMe.cs" />
-    <Compile Include="MemeGenerator.cs" />
+    <Compile Include="MemeCaptain.cs" />
     <Compile Include="Pager.cs" />
     <Compile Include="Ping.cs" />
     <Compile Include="PowerShell.cs" />

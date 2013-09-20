@@ -14,7 +14,7 @@ namespace NBot.MessageHandlers
         [Respond("brace yourself {{caption}}")]
         public void BraceYourself(Message message, IMessageClient client, string caption)
         {
-            MemGen(message, client, "http://i.imgur.com/cOnPlV7.jpg", "Brace Yourself", caption);
+            MemeGen(message, client, "http://i.imgur.com/cOnPlV7.jpg", "Brace Yourself", caption);
         }
 
         [Help(Syntax = "All your <text> are belong to <text>",
@@ -23,7 +23,7 @@ namespace NBot.MessageHandlers
         [Respond("(All your {{thing}}) (are belong to {{someone}})")]
         public void AllYourBelongTo(Message message, IMessageClient client, string thing, string someone)
         {
-            MemGen(message, client, "http://i.imgur.com/gzPiQ8R.jpg", string.Format("All your {0}", thing), string.Format("are belong to {0}", someone));
+            MemeGen(message, client, "http://i.imgur.com/gzPiQ8R.jpg", string.Format("All your {0}", thing), string.Format("are belong to {0}", someone));
         }
 
         [Help(Syntax = "<text> ALL the <things>",
@@ -32,7 +32,7 @@ namespace NBot.MessageHandlers
         [Respond("{{action}} (ALL the {{things}})")]
         public void AllTheThings(Message message, IMessageClient client, string action, string things)
         {
-            MemGen(message, client, "http://memecaptain.com/all_the_things.jpg", action, string.Format("ALL the {0}", things));
+            MemeGen(message, client, "http://memecaptain.com/all_the_things.jpg", action, string.Format("ALL the {0}", things));
         }
 
         [Help(Syntax = "I don't always <something> but when i do <text>",
@@ -41,7 +41,7 @@ namespace NBot.MessageHandlers
         [Respond("(I DON'?T ALWAYS {{something}}) (BUT WHEN I DO,? {{how}})")]
         public void DontAlways(Message message, IMessageClient client, string something, string how)
         {
-            MemGen(message, client, "http://memecaptain.com/most_interesting.jpg", string.Format("I DON'?T ALWAYS {0}", something), string.Format("BUT WHEN I DO,? {0}", how));
+            MemeGen(message, client, "http://memecaptain.com/most_interesting.jpg", string.Format("I DON'?T ALWAYS {0}", something), string.Format("BUT WHEN I DO,? {0}", how));
         }
 
         [Help(Syntax = "Y U NO <text>",
@@ -50,7 +50,7 @@ namespace NBot.MessageHandlers
         [Respond("Y U NO {{doSomething}}")]
         public void WhyYouNo(Message message, IMessageClient client, string doSomething)
         {
-            MemGen(message, client, "http://memecaptain.com/y_u_no.jpg", "Y U NO", doSomething);
+            MemeGen(message, client, "http://memecaptain.com/y_u_no.jpg", "Y U NO", doSomething);
         }
 
         [Help(Syntax = "<text> (NAILED IT)",
@@ -59,7 +59,7 @@ namespace NBot.MessageHandlers
         [Respond("{{topCaption}} (NAILED IT)")]
         public void NailedIt(Message message, IMessageClient client, string topCaption)
         {
-            MemGen(message, client, "http://memecaptain.com/success_kid.jpg", topCaption, "NAILED IT");
+            MemeGen(message, client, "http://memecaptain.com/success_kid.jpg", topCaption, "NAILED IT");
         }
 
         [Help(Syntax = "<text> (SUCCESS|NAILED IT)",
@@ -68,10 +68,10 @@ namespace NBot.MessageHandlers
         [Respond("{{topCaption}} (SUCCESS)")]
         public void Success(Message message, IMessageClient client, string topCaption)
         {
-            MemGen(message, client, "http://memecaptain.com/success_kid.jpg", topCaption, "SUCCESS");
+            MemeGen(message, client, "http://memecaptain.com/success_kid.jpg", topCaption, "SUCCESS");
         }
 
-        private void MemGen(Message message, IMessageClient client, string urlString, string text1, string text2)
+        private void MemeGen(Message message, IMessageClient client, string urlString, string text1, string text2)
         {
             try
             {

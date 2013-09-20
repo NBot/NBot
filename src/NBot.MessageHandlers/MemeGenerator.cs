@@ -10,6 +10,23 @@ namespace NBot.MessageHandlers
 {
     public class MemeGenerator : MessageHandler
     {
+        [Help(Syntax = "FindMemeGenerator <Url>",
+            Description = "Given the Url get MemeGenerator.net details. Just needed for implementing new memes",
+            Example = "FindMemeGenerator Mr-T")]
+        [Respond("FindMemeGenerator( {{url}})")]
+        public void FindMemeGenerator(Message message, IMessageClient client, string url)
+        {
+            IRestClient httpClient =
+                GetJsonServiceClient(
+                    string.Format(
+                        "http://version1.api.memegenerator.net/Generator_Select_ByUrlNameOrGeneratorID?generatorID=&urlName={0}",
+                        url));
+
+            var response = httpClient.Get<string>("");
+
+            client.ReplyTo(message, response);
+        }
+
         [Help(Syntax = "pity <Phrase>",
             Description = "Given the (optional)input phrase, a Mr-T I Pity The Fool will be returned for that phrase.",
             Example = "pity that breaks the build")]
@@ -23,8 +40,38 @@ namespace NBot.MessageHandlers
                 phrase = GetRandomPity();
             }
 
-            IRestClient httpClient = GetJsonServiceClient("http://version1.api.memegenerator.net/Instance_Create?username=test&password=test&languageCode=en&generatorID=1646&imageID=5353&text0=" + pity + "&text1=" + phrase);
-            
+            MemeGen(message, client, "1646", "5353", pity, phrase);
+        }
+
+        [Help(Syntax = "courage <Phrase 1>, <Phrase 2>",
+            Description = "Given the input phrases, a courage wolf will be returned.",
+            Example = "courage mosquito bites you, eat it and take back your blood")]
+        [Respond("courage( me)?( {{phrase1}})?(, {{phrase2}}?)")]
+        public void CourageWolf(Message message, IMessageClient client, string phrase1, string phrase2)
+        {
+            MemeGen(message, client, "303", "24", phrase1, phrase2);
+        }
+
+        [Help(Syntax = "insanity <Phrase 1>, <Phrase 2>",
+            Description = "Given the input phrases, a insanity wolf will be returned.",
+            Example = "insanity rob a bank, burn the money")]
+        [Respond("insanity( me)?( {{phrase1}})?(, {{phrase2}}?)")]
+        public void InsanityWolf(Message message, IMessageClient client, string phrase1, string phrase2)
+        {
+            MemeGen(message, client, "45", "20", phrase1, phrase2);
+        }
+
+        private void MemeGen(Message message, IMessageClient client, string generatorId, string imageId, string text0, string text1)
+        {
+            IRestClient httpClient =
+                GetJsonServiceClient(
+                    string.Format(
+                        "http://version1.api.memegenerator.net/Instance_Create?username=test&password=test&languageCode=en&generatorID={0}&imageID={3}&text0={1}&text1={2}",
+                        generatorId,
+                        text0,
+                        text1,
+                        imageId));
+
             var response = httpClient.Get<MemeGeneratorResponse>("");
 
             client.ReplyTo(message, response.Result.InstanceImageUrl);

@@ -32,7 +32,7 @@ namespace NBot.ConsoleAdapter
                 .RegisterHandler(new Pager())
                 .RegisterHandler(new PirateTranslator())
                 .RegisterHandler(new Ping())
-                .RegisterHandler(new PityMe())
+                .RegisterHandler(new MemeGenerator())
                 .RegisterHandler(new Remember())
                 .RegisterHandler(new Sensitive())
                 .RegisterHandler(new Sosearch())                

@@ -62,7 +62,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="PirateTranslator.cs" />
-    <Compile Include="PityMe.cs" />
+    <Compile Include="MemeGenerator.cs" />
     <Compile Include="Status.cs" />
     <Compile Include="DownForMe.cs">
       <SubType>Code</SubType>

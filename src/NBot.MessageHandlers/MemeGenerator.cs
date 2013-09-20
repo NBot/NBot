@@ -8,7 +8,7 @@ using ServiceStack.Service;
 
 namespace NBot.MessageHandlers
 {
-    public class PityMe : MessageHandler
+    public class MemeGenerator : MessageHandler
     {
         [Help(Syntax = "pity <Phrase>",
             Description = "Given the (optional)input phrase, a Mr-T I Pity The Fool will be returned for that phrase.",

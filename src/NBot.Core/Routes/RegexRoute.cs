@@ -8,17 +8,16 @@ namespace NBot.Core.Routes
 {
     public class RegexRoute : IRoute, IMessageParameterProvider
     {
-        private readonly string _pattern;
+        private readonly Regex _regex;
         private const string RegexParameterPattern = "{{(?<name>\\w+)}}";
         private List<string> _names = new List<string>();
 
         public RegexRoute(IMessageHandler handler, MethodInfo endPoint, string pattern)
         {
-            _pattern = Regex.Replace(pattern, RegexParameterPattern, match =>
-                                                                         {
-                                                                             _names.Add(match.Groups["name"].Value);
-                                                                             return "(?<" + match.Groups["name"].Value + ">.*)";
-                                                                         });
+            string parameterizedPattern = Regex.Replace(pattern, RegexParameterPattern, match => "(?<" + match.Groups["name"].Value + ">.*)");
+
+            _regex = new Regex(parameterizedPattern, RegexOptions.IgnorePatternWhitespace);
+
             Handler = handler;
             EndPoint = endPoint;
         }
@@ -30,16 +29,15 @@ namespace NBot.Core.Routes
 
         public bool IsMatch(Message message)
         {
-            return !string.IsNullOrEmpty(message.Content) &&
-                   Regex.IsMatch(message.Content, _pattern, RegexOptions.IgnoreCase);
+            return !string.IsNullOrEmpty(message.Content) && _regex.IsMatch(message.Content);
         }
 
 
 
         public Dictionary<string, string> GetInputParameters(Message message)
         {
-            Match match = Regex.Match(message.Content, _pattern, RegexOptions.IgnoreCase);
-            return _names.ToDictionary(name => name, name => match.Groups[name].Value);
+            Match match = _regex.Match(message.Content);
+            return _regex.GetGroupNames().ToDictionary(name => name, name => match.Groups[name].Value.Trim());
         }
 
         #endregion

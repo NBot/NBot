@@ -33,9 +33,14 @@ namespace NBot.ConsoleAdapter
                 .RegisterHandler(new PirateTranslator())
                 .RegisterHandler(new Ping())
                 .RegisterHandler(new PityMe())
+                .RegisterHandler(new PowerShell(p =>
+                                                    {
+                                                        p.Add("test", @"c:\test.ps1");
+                                                        p.Add("test2", @"c:\test2.ps1");
+                                                    }))
                 .RegisterHandler(new Remember())
                 .RegisterHandler(new Sensitive())
-                .RegisterHandler(new Sosearch())                
+                .RegisterHandler(new Sosearch())
                 .RegisterHandler(new Status())
                 .RegisterHandler(new Swanson())
                 .Run();

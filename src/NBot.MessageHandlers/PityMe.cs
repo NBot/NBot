@@ -10,8 +10,6 @@ namespace NBot.MessageHandlers
 {
     public class PityMe : MessageHandler
     {
-        private Random randoms = new Random(DateTime.Now.Millisecond);
-
         [Help(Syntax = "pity <Phrase>",
             Description = "Given the (optional)input phrase, a Mr-T I Pity The Fool will be returned for that phrase.",
             Example = "pity that breaks the build")]
@@ -44,9 +42,7 @@ namespace NBot.MessageHandlers
                     "cast pity towards those"
                 };
 
-
-
-            var pity = pityVernaculars[randoms.Next(0, pityVernaculars.Count)];
+            var pity = GetRandomItem(pityVernaculars);
 
             return pity;
         }
@@ -62,7 +58,7 @@ namespace NBot.MessageHandlers
                     "who isn't nBot"
                 };
 
-            var thingToPity = thingsToPity[randoms.Next(0, thingsToPity.Count)];
+            var thingToPity = GetRandomItem(thingsToPity);
 
             return thingToPity;
         }

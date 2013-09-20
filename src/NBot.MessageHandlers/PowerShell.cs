@@ -14,12 +14,11 @@ namespace NBot.MessageHandlers
 
         public PowerShell(Action<Dictionary<string, string>> build)
         {
-            
             _commands = new Dictionary<string, string>();
             build(_commands);
         }
 
-        [Respond("exec {{command}} <- {{parameters}}")]
+        [Respond("exec {{command}}\\((?<parameters>(\"?[\\w\\d]+\"?)(,\\s*\"?[\\w\\d]+\"?)*)\\)")]
         [Respond("exec {{command}}")]
         public void HandlePowerShellCommand(Message message, IMessageClient client, string command, string parameters)
         {

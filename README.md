@@ -15,11 +15,27 @@ NBot is a "port" of git hub's Hubot but targeted at the .NET platform. It acts a
 3. Create [Adapters](https://github.com/NBot/NBot/wiki/Adapter)
 4. Create [Message Filters](https://github.com/NBot/NBot/wiki/MessageFilter)
 
-## Open Source Dependencies
-1. [Top Shelf](https://github.com/phatboyg/Topshelf)
-2. [ServiceStack.Common](https://github.com/ServiceStack/ServiceStack)
-2. [ServiceStack.Text](https://github.com/ServiceStack/ServiceStack.Text)
-3. [ServiceStack.Interfaces](https://github.com/ServiceStack/ServiceStack)
+## Quick Start - Console Setup
+* Set ConsoleAdapter Project as the Startup Project
+* Use the Fluent interface to configure your NBot
+* Chat Bot Bliss....
+
+
+```
+static void Main(string[] args)
+{
+            // New up a brain to use
+            var brain = new FileBrain(".\\Brain");
+
+            Robot.Create("NBot")
+                .UseBrain(brain) // <- Use your brain
+                .RegisterMessageFilter(new HandleBarsMessageFilter(brain)) // <- Register zero or more Message Filters
+                .RegisterAdapter(new ConsoleAdapter(), "ConsoleChannel") // <- Register one ore more Adapters
+                .RegisterHandlersFromAssembly(Assembly.Load("NBot.MessageHandlers")) // <- Register all the Handlers
+                .AllowedInAllRooms() // <- Allow them in all rooms
+                .Run(); // <- Get Crackin
+}
+```
 
 ## Getting Started
 Creating your first plugin.
@@ -42,27 +58,19 @@ Creating your first plugin.
 ```
 see [Message Handler](https://github.com/NBot/NBot/wiki/Message-Handler) for more information...
 
-## Quick Start - Console Setup
-* Set ConsoleAdapter Project as the Startup Project
-* Use the Fluent interface to configure your NBot
-* Chat Bot Bliss....
+## Contributors
+1. [Jonathan Starnes](https://github.com/JonathanStarnes) - Project Lead
+2. [Billy Laney](https://github.com/supabill)
+3. [Tyler Falkenhgen](https://github.com/tfalkenhagen)
 
 
-```
-static void Main(string[] args)
-{
-            // New up a brain to use
-            var brain = new FileBrain(".\\Brain");
+## Open Source Dependencies
+1. [Top Shelf](https://github.com/phatboyg/Topshelf)
+2. [ServiceStack.Common](https://github.com/ServiceStack/ServiceStack)
+2. [ServiceStack.Text](https://github.com/ServiceStack/ServiceStack.Text)
+3. [ServiceStack.Interfaces](https://github.com/ServiceStack/ServiceStack)
 
-            Robot.Create("NBot")
-                .UseBrain(brain) // <- Use your brain
-                .RegisterMessageFilter(new HandleBarsMessageFilter(brain)) // <- Register zero or more Message Filters
-                .RegisterAdapter(new ConsoleAdapter(), "ConsoleChannel") // <- Register one ore more Adapters
-                .RegisterHandlersFromAssembly(Assembly.Load("NBot.MessageHandlers")) // <- Register all the Handlers
-                .AllowedInAllRooms() // <- Allow them in all rooms
-                .Run(); // <- Get Crackin
-}
-```
+
 
 
 

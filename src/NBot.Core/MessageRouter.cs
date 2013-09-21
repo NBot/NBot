@@ -32,17 +32,19 @@ namespace NBot.Core
             _brain = brain;
         }
 
-        public void RegisterMessageHandler(IMessageHandler handler)
+        public void RegisterMessageHandler(IMessageHandler handler, List<string> allowedRooms = null)
         {
             Type handlerType = handler.GetType();
 
             foreach (MethodInfo endpoint in handlerType.GetMethods(BindingFlags.Public | BindingFlags.Instance))
             {
-                object[] messageAttributes = endpoint.GetCustomAttributes(typeof(HandleMessageAttribute), true);
+                var messageAttributes = endpoint.GetCustomAttributes(typeof(HandleMessageAttribute), true);
 
                 foreach (HandleMessageAttribute messageAttribute in messageAttributes)
                 {
-                    _routes.Add(messageAttribute.CreateRoute(handler, endpoint));
+                    var route = messageAttribute.CreateRoute(handler, endpoint);
+
+                    _routes.Add(allowedRooms == null ? route : new RoomSecurityRoute(route, allowedRooms));
                 }
             }
         }

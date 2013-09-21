@@ -93,6 +93,7 @@
     <Compile Include="Routes\MessageTypeRoute.cs" />
     <Compile Include="Routes\PipedRoute.cs" />
     <Compile Include="Routes\RegexRoute.cs" />
+    <Compile Include="Routes\RoomSecurityRoute.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

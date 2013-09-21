@@ -58,23 +58,8 @@ static void Main(string[] args)
                 .UseBrain(brain) // <- Use your brain
                 .RegisterMessageFilter(new HandleBarsMessageFilter(brain)) // <- Register zero or more Message Filters
                 .RegisterAdapter(new ConsoleAdapter(), "ConsoleChannel") // <- Register one ore more Adapters
-                .RegisterHandler(new Achievement()) // <- Register zero or more message handlers
-                .RegisterHandler(new Akbar())
-                .RegisterHandler(new Announce())
-                .RegisterHandler(new AsciiMe())
-                .RegisterHandler(new CalmDown())
-                .RegisterHandler(new ChuckNorris())
-                .RegisterHandler(new DownForMe())
-                .RegisterHandler(new ExcuseMe())
-                .RegisterHandler(new FacePalm())
-                .RegisterHandler(new FortuneMe())
-                .RegisterHandler(new Hello())
-                .RegisterHandler(new MemeGenerator())
-                .RegisterHandler(new Pager())
-                .RegisterHandler(new Ping())
-                .RegisterHandler(new Remember())
-                .RegisterHandler(new Sensitive())
-                .RegisterHandler(new Swanson())
+                .RegisterHandlersFromAssembly(Assembly.Load("NBot.MessageHandlers")) // <- Register all the Handlers
+                .AllowedInAllRooms() // <- Allow them in all rooms
                 .Run(); // <- Get Crackin
 }
 ```

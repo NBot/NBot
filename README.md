@@ -24,18 +24,43 @@ NBot is a "port" of git hub's Hubot but targeted at the .NET platform. It acts a
 ```
 static void Main(string[] args)
 {
-            // New up a brain to use
-            var brain = new FileBrain(".\\Brain");
+    // New up a brain to use
+    var brain = new FileBrain(".\\Brain");
 
-            Robot.Create("NBot")
-                .UseBrain(brain) // <- Use your brain
-                .RegisterMessageFilter(new HandleBarsMessageFilter(brain)) // <- Register zero or more Message Filters
-                .RegisterAdapter(new ConsoleAdapter(), "ConsoleChannel") // <- Register one ore more Adapters
-                .RegisterHandlersFromAssembly(Assembly.Load("NBot.MessageHandlers")) // <- Register all the Handlers
-                .AllowedInAllRooms() // <- Allow them in all rooms
-                .Run(); // <- Get Crackin
+    Robot.Create("NBot")
+        .UseBrain(brain) // <- Use your brain
+        .RegisterMessageFilter(new HandleBarsMessageFilter(brain)) // <- Register zero or more Message Filters
+        .RegisterAdapter(new ConsoleAdapter(), "ConsoleChannel") // <- Register one ore more Adapters
+        .RegisterHandlersFromAssembly(Assembly.Load("NBot.MessageHandlers")) // <- Register all the Handlers
+        .AllowedInAllRooms() // <- Allow them in all rooms
+        .Run(); // <- Get Crackin
 }
 ```
+
+## Quick Start - Campfire 
+* Create a new Console Application
+* Refreence NBot.Core, NBot.MessageHandlers, NBot.CampfireAdapter
+* Use the Fluent interface to configure your NBot
+* Chat Bot Nirvana..
+
+```
+static void Main(string[] args)
+{
+    // New up a brain to use
+    var brain = new SimpleBrain();
+    IAdapter adapter = new CampfireAdapter.CampfireAdapter("TOKEN", "SUBDOMAIN", new List<int>() { ROOMS_TO_JOIN });
+
+    Robot.Create("NAME", "ALIAS", "ENVIRONMENT")
+        .UseBrain(brain) // <- Use your brain
+        .RegisterMessageFilter(new HandleBarsMessageFilter(brain)) // <- Register zero or more Message Filters
+        .RegisterAdapter(adapter, "Campfire") // <- Register one ore more Adapters
+        .RegisterHandlersFromAssembly(Assembly.Load("NBot.MessageHandlers")) // <- Register all the Handlers
+        .AllowedInAllRooms() // <- Allow them in all rooms
+        .Run(); // <- Get Crackin
+}
+
+```
+
 
 ## Getting Started
 Creating your first plugin.

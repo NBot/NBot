@@ -95,7 +95,8 @@ see [Message Handler](https://github.com/NBot/NBot/wiki/Message-Handler) for mor
 2. [ServiceStack.Text](https://github.com/ServiceStack/ServiceStack.Text)
 3. [ServiceStack.Interfaces](https://github.com/ServiceStack/ServiceStack)
 
-
+The NBot Logo was provided by The Noun Project
+http://thenounproject.com/
 
 
 

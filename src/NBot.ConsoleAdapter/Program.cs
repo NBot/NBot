@@ -14,7 +14,7 @@ namespace NBot.ConsoleAdapter
                 .UseBrain(brain)
                 .RegisterMessageFilter(new HandleBarsMessageFilter(brain))
                 .RegisterAdapter(new ConsoleAdapter(), "ConsoleChannel")
-                .RegisterHandlersFromAssembly(Assembly.Load("NBot.MessageHandlers"))
+                .RegisterHandlersInAssembly(Assembly.Load("NBot.MessageHandlers"))
                 .AllowedInAllRooms()
                 .Run();
 

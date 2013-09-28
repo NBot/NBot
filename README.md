@@ -36,6 +36,7 @@ static void Main(string[] args)
         .Run(); // <- Get Crackin
 }
 ```
+See [Configration](https://github.com/NBot/NBot/wiki/Configuration) for more details.
 
 ## Quick Start - Campfire 
 * Create a new Console Application
@@ -61,6 +62,7 @@ static void Main(string[] args)
 
 ```
 
+See [Configration](https://github.com/NBot/NBot/wiki/Configuration) for more details.
 
 ## Getting Started
 Creating your first plugin.

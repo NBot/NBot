@@ -1,6 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using NBot.Core;
+using ServiceStack.Common;
+using ServiceStack.Common.Extensions;
+using ServiceStack.ServiceClient.Web;
+using ServiceStack.Text;
 
 namespace NBot.CampfireAdapter
 {
@@ -24,20 +30,28 @@ namespace NBot.CampfireAdapter
 
         public void StarProduction()
         {
-            foreach (var roomId in _roomsToJoin)
+            var client = new JsonServiceClient("https://{0}.campfirenow.com".FormatWith(_account)) { UserName = _token, Password = "X" };
+            var user = client.Get<CampfireUserWrapper>("/users/me.json").User;
+
+            Parallel.ForEach(_roomsToJoin, (roomId) =>
             {
-                var listener = new CampfireRoomListener(_token, _account, roomId, OnMessageProduced);
-                _listeners.Add(listener);
-                listener.StartListening();
-            }
+                client.Post<string>("/room/{0}/join.json".FormatWith(roomId), string.Empty);
+                var roomListenerContext = new CampfireRoomListenerContext(roomId, _token, user.Id.ToInt(), OnMessageProduced);
+                var roomListener = new CampfireRoomListener(roomListenerContext);
+                _listeners.Add(roomListener);
+                roomListener.StartListening();
+            });
         }
 
         public void StopProduction()
         {
-            foreach (var campfireRoomListener in _listeners)
+            var client = new JsonServiceClient("https://{0}.campfirenow.com".FormatWith(_account)) { UserName = _token, Password = "X" };
+            
+            Parallel.ForEach(_listeners, (campfireRoomListener) =>
             {
+                client.Post<string>("/room/{0}/leave.json".FormatWith(campfireRoomListener.Context.RoomId), string.Empty);
                 campfireRoomListener.StopListening();
-            }
+            });
         }
 
         protected virtual void OnMessageProduced(Message message)

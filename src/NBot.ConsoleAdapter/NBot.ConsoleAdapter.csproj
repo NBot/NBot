@@ -51,6 +51,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\NBot.CampfireAdapter\NBot.CampfireAdapter.csproj">
+      <Project>{bc069e29-05cf-4842-b953-e935f59fa372}</Project>
+      <Name>NBot.CampfireAdapter</Name>
+    </ProjectReference>
     <ProjectReference Include="..\NBot.Core\NBot.Core.csproj">
       <Project>{dcea0219-7995-471b-b765-a9e6ce478c41}</Project>
       <Name>NBot.Core</Name>
@@ -59,6 +63,9 @@
       <Project>{e0892510-92c5-44a1-a33e-2cbd0ad96e0e}</Project>
       <Name>NBot.MessageHandlers</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

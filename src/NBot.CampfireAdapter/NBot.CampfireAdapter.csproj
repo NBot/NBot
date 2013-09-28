@@ -52,8 +52,10 @@
     <Compile Include="CampfireMessage.cs" />
     <Compile Include="CampfireMessageClient.cs" />
     <Compile Include="CampfireMessageProducer.cs" />
+    <Compile Include="CampfireMessageRecievedContext.cs" />
     <Compile Include="CampfireRoom.cs" />
     <Compile Include="CampfireRoomListener.cs" />
+    <Compile Include="CampfireRoomListenerContext.cs" />
     <Compile Include="CampfireUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -64,6 +66,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

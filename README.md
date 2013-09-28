@@ -31,7 +31,7 @@ static void Main(string[] args)
         .UseBrain(brain) // <- Use your brain
         .RegisterMessageFilter(new HandleBarsMessageFilter(brain)) // <- Register zero or more Message Filters
         .RegisterAdapter(new ConsoleAdapter(), "ConsoleChannel") // <- Register one ore more Adapters
-        .RegisterHandlersFromAssembly(Assembly.Load("NBot.MessageHandlers")) // <- Register all the Handlers
+        .RegisterHandlersInAssembly(Assembly.Load("NBot.MessageHandlers")) // <- Register all the Handlers
         .AllowedInAllRooms() // <- Allow them in all rooms
         .Run(); // <- Get Crackin
 }

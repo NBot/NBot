@@ -6,10 +6,11 @@ using ServiceStack.Service;
 
 namespace NBot.MessageHandlers
 {
+    [Tag("Fun", "Excuse")]
     public class ExcuseMe : MessageHandler
     {
         [Respond("excuse me")]
-        [Help(Syntax = "nbot excuse me",Description = "Return a developer excuse for you to use.", Example= "nbot excuse me")]
+        [Help(Syntax = "nbot excuse me", Description = "Return a developer excuse for you to use.", Example = "nbot excuse me")]
         public void DoExcuseMe(Message mesage, IMessageClient client)
         {
             IEntity user = client.GetUser(mesage.UserId);

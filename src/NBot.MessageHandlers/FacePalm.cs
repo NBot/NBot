@@ -6,6 +6,7 @@ using ServiceStack.Service;
 
 namespace NBot.MessageHandlers
 {
+    [Tag("Fun", "Meme")]
     public class FacePalm : MessageHandler
     {
         [Help(Syntax = "facepalm",

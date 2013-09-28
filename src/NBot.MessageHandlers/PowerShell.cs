@@ -8,6 +8,7 @@ using NBot.Core.Attributes;
 
 namespace NBot.MessageHandlers
 {
+    [Tag("Productivity")]
     public class PowerShell : MessageHandler
     {
         private readonly Dictionary<string, string> _commands;

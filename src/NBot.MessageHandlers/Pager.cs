@@ -8,6 +8,7 @@ using NBot.Core.Help;
 
 namespace NBot.MessageHandlers
 {
+    [Tag("Productivity")]
     public class Pager : MessageHandler
     {
         [Help(Syntax = "page <User>",

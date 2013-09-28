@@ -6,6 +6,7 @@ using NBot.Core.Help;
 
 namespace NBot.MessageHandlers
 {
+    [Tag("Fun","Language")]
     public class PirateTranslator : MessageHandler
     {
         [Help(Syntax = "pirate <text>",

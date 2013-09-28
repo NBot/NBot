@@ -7,6 +7,7 @@ using NBot.Core.Attributes;
 
 namespace NBot.MessageHandlers
 {
+    [Tag("Fun", "Recognition")]
     public class BotSnack : MessageHandler
     {
         readonly string[] _responses = new[] 

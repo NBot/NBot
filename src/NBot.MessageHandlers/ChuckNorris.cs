@@ -8,6 +8,7 @@ using ServiceStack.Text;
 
 namespace NBot.MessageHandlers
 {
+    [Tag("Fun","Joke","Chuck","Meme")]
     public class ChuckNorris : MessageHandler
     {
         [Help(Syntax = "chuck norris me <Optional: Name>",

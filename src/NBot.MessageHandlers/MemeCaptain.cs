@@ -6,6 +6,7 @@ using NBot.Core.Help;
 
 namespace NBot.MessageHandlers
 {
+    [Tag("Fun","Meme")]
     public class MemeCaptain : MessageHandler
     {
         [Help(Syntax = "Brace yourself <text>",

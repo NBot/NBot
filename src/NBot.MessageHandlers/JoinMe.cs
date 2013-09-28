@@ -5,6 +5,7 @@ using NBot.Core.Help;
 
 namespace NBot.MessageHandlers
 {
+    [Tag("Productivity")]
     public class JoinMe : MessageHandler
     {
         [Help(Syntax = "joinme",

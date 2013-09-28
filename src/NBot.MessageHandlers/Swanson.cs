@@ -5,6 +5,7 @@ using NBot.Core.Help;
 
 namespace NBot.MessageHandlers
 {
+    [Tag("Fun", "Meme")]
     public class Swanson : MessageHandler
     {
 

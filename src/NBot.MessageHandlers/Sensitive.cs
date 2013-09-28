@@ -4,6 +4,7 @@ using NBot.Core.Help;
 
 namespace NBot.MessageHandlers
 {
+    [Tag("Fun")]
     public class Sensitive : MessageHandler
     {
         readonly string[] _messages = new[]

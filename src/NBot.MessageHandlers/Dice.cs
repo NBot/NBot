@@ -8,6 +8,7 @@ using ServiceStack.Text;
 
 namespace NBot.MessageHandlers
 {
+    [Tag("Productivity")]
     public class Dice : MessageHandler
     {
         [Help(Syntax = "roll dice <sides>",

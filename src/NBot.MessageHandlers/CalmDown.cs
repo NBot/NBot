@@ -4,6 +4,7 @@ using NBot.Core.Help;
 
 namespace NBot.MessageHandlers
 {
+    [Tag("Fun","Meme","Calm")]
     public class CalmDown : MessageHandler
     {
         [Help(Syntax = "nbot manatee or calm or calm me", Description = "Post a picture of a calming manatee.", Example = "nbot manatee")]

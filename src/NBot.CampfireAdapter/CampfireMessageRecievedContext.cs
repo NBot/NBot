@@ -30,7 +30,7 @@ namespace NBot.CampfireAdapter
                 Channel = "Campfire",
                 RoomId = message.room_id,
                 UserId = message.user_id,
-                Content = message.body,
+                Content = message.body ?? string.Empty,
                 Type = message.type
             };
         }

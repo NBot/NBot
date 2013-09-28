@@ -7,6 +7,7 @@ using ServiceStack.Service;
 
 namespace NBot.MessageHandlers
 {
+    [Tag("Productivity")]
     public class DownForMe : MessageHandler
     {
         private const string DownForMeSite = "http://www.downforeveryoneorjustme.com/";

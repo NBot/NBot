@@ -6,6 +6,7 @@ using NBot.Core.Help;
 
 namespace NBot.MessageHandlers
 {
+    [Tag("Productivity")]
     public class Status : MessageHandler
     {
         [Help(Syntax = "check me in",

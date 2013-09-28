@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.Remoting.Messaging;
+using System.Web;
 using System.Web.UI;
+using NBot.Core.Attributes;
+using ServiceStack.Common.Extensions;
 
 namespace NBot.Core
 {
@@ -16,20 +19,12 @@ namespace NBot.Core
 
         public static HandlerRegistration RegisterHandlersInAssembly(this IRobotConfiguration robot, Assembly assembly)
         {
-            var handlers = new List<IMessageHandler>();
+            return new HandlerRegistration(robot, GetHandlers(assembly).Select(CreateInstance).Where(h => h != null).ToList());
+        }
 
-            foreach (var handler in assembly.GetTypes().Where(t => typeof(IMessageHandler).IsAssignableFrom(t)))
-            {
-                var construstor = handler.GetConstructor(Type.EmptyTypes);
-
-                if (construstor != null)
-                {
-                    var instance = Activator.CreateInstance(handler) as IMessageHandler;
-                    handlers.Add(instance);
-                }
-            }
-
-            return new HandlerRegistration(robot, handlers);
+        public static HandlerRegistration RegisterHandlersInAssemblyByTags(this IRobotConfiguration robot, Assembly assembly, params string[] tags)
+        {
+            return new HandlerRegistration(robot, GetHandlers(assembly).Where(t => AnyTag(t, tags)).Select(CreateInstance).Where(h => h != null).ToList());
         }
 
         public class HandlerRegistration
@@ -70,6 +65,30 @@ namespace NBot.Core
 
                 return _configuration;
             }
+        }
+
+        private static IEnumerable<Type> GetHandlers(Assembly assembly)
+        {
+            return assembly.GetTypes().Where(t => typeof(IMessageHandler).IsAssignableFrom(t));
+        }
+
+        private static bool AnyTag(Type handlerType, IEnumerable<string> tags)
+        {
+            var tagAttributes = handlerType.GetCustomAttributes(typeof(TagAttribute), true);
+
+            return tagAttributes.Cast<TagAttribute>().Any(tagAttribute => tagAttribute.Tags.Any(tag => tags.Select(t => t.ToLower()).Any(t => t == tag)));
+        }
+
+        private static IMessageHandler CreateInstance(Type handlerType)
+        {
+            var construstor = handlerType.GetConstructor(Type.EmptyTypes);
+
+            if (construstor != null)
+            {
+                return Activator.CreateInstance(handlerType) as IMessageHandler;
+            }
+
+            return null;
         }
     }
 }

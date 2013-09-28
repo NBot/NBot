@@ -4,6 +4,7 @@ using NBot.Core.Help;
 
 namespace NBot.MessageHandlers
 {
+    [Tag("Fun","Joke")]
     public class FortuneMe : MessageHandler
     {
         [Help(Syntax = "<{0}|{1}> fortune [me]",Description = "Displays a forturne", Example = "nbot fortune me")]

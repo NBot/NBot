@@ -4,6 +4,7 @@ using NBot.Core.Help;
 
 namespace NBot.MessageHandlers
 {
+    [Tag("Fun", "Recognition")]
     public class Achievement : MessageHandler
     {
         [Help(Syntax = "[{0}|{1}] achievement [get|unlock|unlocked] <achievement text>", Description = "Get an XBox badge with the achievement on it.", Example = "nbot achievement unlocked Winning!")]

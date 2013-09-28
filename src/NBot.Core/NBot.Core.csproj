@@ -57,6 +57,7 @@
     <Compile Include="Attributes\PipedCommandAttribute.cs" />
     <Compile Include="Attributes\RespondAttribute.cs" />
     <Compile Include="Attributes\MessageTypeAttribute.cs" />
+    <Compile Include="Attributes\TagAttribute.cs" />
     <Compile Include="Brains\FileBrain.cs" />
     <Compile Include="Brains\IBrain.cs" />
     <Compile Include="Brains\SimpleBrain.cs" />

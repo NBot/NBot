@@ -6,6 +6,7 @@ using ServiceStack.Text;
 
 namespace NBot.MessageHandlers
 {
+    [Tag("Fun","Ascii")]
     public class AsciiMe : MessageHandler
     {
         [Help(Syntax = "ascii me <Phrase>",

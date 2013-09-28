@@ -4,6 +4,7 @@ using NBot.Core.Help;
 
 namespace NBot.MessageHandlers
 {
+    [Tag("Fun","Meme")]
     public class Akbar : MessageHandler
     {
         private readonly string[] akbars =

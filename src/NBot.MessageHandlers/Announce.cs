@@ -4,6 +4,7 @@ using NBot.Core.Help;
 
 namespace NBot.MessageHandlers
 {
+    [Tag("Productivity")]
     public class Announce : MessageHandler
     {
         [Help(Syntax = "announce <Message>",

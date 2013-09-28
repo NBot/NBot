@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using NBot.Core.Brains;
 using NBot.Core.Help;
+using NBot.Core.Logging;
 using NBot.Core.MessageFilters;
 using ServiceStack.Text;
 using Topshelf;
@@ -21,12 +22,14 @@ namespace NBot.Core
         {
             Name = name;
             Alias = alias;
+            Log = new ConsoleLog();
             _router = new MessageRouter(new SimpleBrain());
             _environment = environment;
         }
 
         public static string Name { get; set; }
         public static string Alias { get; set; }
+        public static INBotLog Log { get; private set; }
 
         public static T GetSetting<T>(string key)
         {
@@ -71,6 +74,12 @@ namespace NBot.Core
         public IRobotConfiguration RegisterMessageFilter(IMessageFilter messageFilter)
         {
             _router.RegisterMessageFilter(messageFilter);
+            return this;
+        }
+
+        public IRobotConfiguration UseLog(INBotLog log)
+        {
+            Log = log;
             return this;
         }
 

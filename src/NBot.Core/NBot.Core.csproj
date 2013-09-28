@@ -67,6 +67,8 @@
     <Compile Include="IRobotConfiguration.cs" />
     <Compile Include="IRobotHost.cs" />
     <Compile Include="IRobot.cs" />
+    <Compile Include="Logging\ConsoleLog.cs" />
+    <Compile Include="Logging\INBotLog.cs" />
     <Compile Include="MessageClientExtensions.cs" />
     <Compile Include="MessageFilterAdapter.cs" />
     <Compile Include="MessageFilterClient.cs" />
@@ -99,6 +101,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

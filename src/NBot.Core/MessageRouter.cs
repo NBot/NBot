@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection;
 using NBot.Core.Attributes;
 using NBot.Core.Brains;
+using NBot.Core.Logging;
 using NBot.Core.MessageFilters;
 using NBot.Core.Routes;
 using ServiceStack.Validation;
@@ -111,7 +112,7 @@ namespace NBot.Core
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
+                Robot.Log.WriteError(string.Format("An error has occurred while processing message \"{0}\"", message.Content), e);
             }
         }
 

@@ -2,6 +2,7 @@
 using System.Globalization;
 using System.IO;
 using System.Threading;
+using NBot.Core;
 
 namespace NBot.CampfireAdapter
 {
@@ -32,7 +33,7 @@ namespace NBot.CampfireAdapter
             {
                 var request = context.CreateRequest();
                 var response = request.GetResponse();
-                Console.WriteLine("Listening to Room {0}", context.RoomId);
+                Robot.Log.WriteInfo(string.Format("Listening to Room {0}", context.RoomId));
 
                 using (Stream stream = response.GetResponseStream())
                 {

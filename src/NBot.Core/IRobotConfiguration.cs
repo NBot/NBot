@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using NBot.Core.Brains;
+using NBot.Core.Logging;
 using NBot.Core.MessageFilters;
 
 namespace NBot.Core
@@ -12,6 +13,7 @@ namespace NBot.Core
         IRobotConfiguration RegisterAdapter(IAdapter adapter, string recieveChannel);
         IRobotConfiguration RegisterHandler(IMessageHandler handler, List<string> allowedRooms = null);
         IRobotConfiguration RegisterMessageFilter(IMessageFilter messageFilter);
+        IRobotConfiguration UseLog(INBotLog log);
         void Run();
     }
 }

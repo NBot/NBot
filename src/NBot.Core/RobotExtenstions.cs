@@ -40,9 +40,7 @@ namespace NBot.Core
 
             public IRobotConfiguration AllowedInRooms(params string[] rooms)
             {
-                var allowedRooms = rooms.ToList();
-
-                return RegisterHandlers(allowedRooms);
+                return RegisterHandlers(rooms);
             }
 
             public IRobotConfiguration AllowedInRooms(params int[] rooms)
@@ -56,7 +54,7 @@ namespace NBot.Core
                 return RegisterHandlers(null);
             }
 
-            private IRobotConfiguration RegisterHandlers(List<string> allowedRooms)
+            private IRobotConfiguration RegisterHandlers(params string[] allowedRooms)
             {
                 foreach (var handler in _handlers)
                 {

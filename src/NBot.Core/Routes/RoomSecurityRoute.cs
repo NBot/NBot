@@ -9,9 +9,9 @@ namespace NBot.Core.Routes
     public class RoomSecurityRoute : IRoute
     {
         private readonly IRoute _innerRoute;
-        private readonly List<string> _allowedRooms;
+        private readonly string[] _allowedRooms;
 
-        public RoomSecurityRoute(IRoute innerRoute, List<string> allowedRooms)
+        public RoomSecurityRoute(IRoute innerRoute, params string[] allowedRooms)
         {
             _innerRoute = innerRoute;
             _allowedRooms = allowedRooms;

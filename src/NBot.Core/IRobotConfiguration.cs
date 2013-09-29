@@ -11,7 +11,7 @@ namespace NBot.Core
         IRobotConfiguration AddSetting<T>(string key, T value);
         IRobotConfiguration UseBrain(IBrain brain);
         IRobotConfiguration RegisterAdapter(IAdapter adapter, string recieveChannel);
-        IRobotConfiguration RegisterHandler(IMessageHandler handler, List<string> allowedRooms = null);
+        IRobotConfiguration RegisterHandler(IMessageHandler handler, params string[] allowedRooms);
         IRobotConfiguration RegisterMessageFilter(IMessageFilter messageFilter);
         IRobotConfiguration UseLog(INBotLog log);
         void Run();

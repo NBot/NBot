@@ -7,7 +7,7 @@ namespace NBot.CampfireAdapter
 {
     public class CampfireAdapter : IAdapter
     {
-        public CampfireAdapter(string token, string account, List<int> roomsToJoin)
+        public CampfireAdapter(string token, string account, params int[] roomsToJoin)
         {
             Producer = new CampfireMessageProducer(token, account, roomsToJoin);
             Client = new CampfireMessageClient(token, account);

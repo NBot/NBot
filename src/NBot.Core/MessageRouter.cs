@@ -33,7 +33,7 @@ namespace NBot.Core
             _brain = brain;
         }
 
-        public void RegisterMessageHandler(IMessageHandler handler, List<string> allowedRooms = null)
+        public void RegisterMessageHandler(IMessageHandler handler, params string[] allowedRooms)
         {
             Type handlerType = handler.GetType();
 
@@ -45,7 +45,7 @@ namespace NBot.Core
                 {
                     var route = messageAttribute.CreateRoute(handler, endpoint);
 
-                    _routes.Add(allowedRooms == null ? route : new RoomSecurityRoute(route, allowedRooms));
+                    _routes.Add(allowedRooms == null || !allowedRooms.Any() ? route : new RoomSecurityRoute(route, allowedRooms));
                 }
             }
         }
@@ -93,7 +93,7 @@ namespace NBot.Core
 
                     foreach (var route in _routes.Where(r => r.IsMatch(segment)))
                     {
-                        Dictionary<string, string> inputParameters = new Dictionary<string, string>();
+                        var inputParameters = new Dictionary<string, string>();
 
                         if (route is IMessageParameterProvider)
                         {

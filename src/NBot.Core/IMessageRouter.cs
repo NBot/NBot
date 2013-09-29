@@ -6,7 +6,7 @@ namespace NBot.Core
 {
     public interface IMessageRouter
     {
-        void RegisterMessageHandler(IMessageHandler handler, List<string> allowedRooms);
+        void RegisterMessageHandler(IMessageHandler handler, params string[] allowedRooms);
         void RegisterAdapter(IAdapter adapter, string channel);
         void RegisterMessageFilter(IMessageFilter filter);
         void RegisterBrain(IBrain brain);

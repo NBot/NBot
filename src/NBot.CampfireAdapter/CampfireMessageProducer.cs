@@ -14,10 +14,10 @@ namespace NBot.CampfireAdapter
     {
         private readonly string _token;
         private readonly string _account;
-        private readonly List<int> _roomsToJoin;
+        private readonly int[] _roomsToJoin;
         private readonly List<CampfireRoomListener> _listeners = new List<CampfireRoomListener>();
 
-        public CampfireMessageProducer(string token, string account, List<int> roomsToJoin)
+        public CampfireMessageProducer(string token, string account, params int[] roomsToJoin)
         {
             _token = token;
             _account = account;

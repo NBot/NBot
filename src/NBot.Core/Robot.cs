@@ -64,7 +64,7 @@ namespace NBot.Core
             return this;
         }
 
-        public IRobotConfiguration RegisterHandler(IMessageHandler handler, List<string> allowedRooms = null)
+        public IRobotConfiguration RegisterHandler(IMessageHandler handler, params string[]  allowedRooms)
         {
             UpdateHelpInformation(handler);
             _router.RegisterMessageHandler(handler, allowedRooms);

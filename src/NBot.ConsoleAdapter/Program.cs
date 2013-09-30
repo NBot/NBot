@@ -9,15 +9,16 @@ namespace NBot.ConsoleAdapter
     {
         private static void Main(string[] args)
         {
+            // New up a brain to use
             var brain = new FileBrain(".\\Brain");
-            Robot.Create("NBot")
-                .UseBrain(brain)
-                .RegisterMessageFilter(new HandleBarsMessageFilter(brain))
-                .RegisterAdapter(new ConsoleAdapter(), "ConsoleChannel")
-                .RegisterHandlersInAssembly(Assembly.Load("NBot.MessageHandlers"))
-                .AllowedInAllRooms()
-                .Run();
 
+            Robot.Create("NBot")
+                .UseBrain(brain) // <- Use your brain
+                .RegisterMessageFilter(new HandleBarsMessageFilter(brain)) // <- Register zero or more Message Filters
+                .RegisterAdapter(new ConsoleAdapter(), "ConsoleChannel") // <- Register one ore more Adapters
+                .RegisterHandlersInAssembly(Assembly.Load("NBot.MessageHandlers")) // <- Register all the Handlers
+                .AllowedInAllRooms() // <- Allow them in all rooms
+                .Run(); // <- Get Crackin
         }
     }
 }

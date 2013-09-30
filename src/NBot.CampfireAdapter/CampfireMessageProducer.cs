@@ -65,13 +65,7 @@ namespace NBot.CampfireAdapter
 
         private static void IncreaseConnectionLimit()
         {
-#if DEBUG
-            string applicationName =
-                Environment.GetCommandLineArgs()[0];
-#else 
-            string applicationName =
-            Environment.GetCommandLineArgs()[0]+ ".exe";
-#endif
+            string applicationName = Environment.GetCommandLineArgs()[0];
             string exePath = System.IO.Path.Combine(Environment.CurrentDirectory, applicationName);
             var configuration = ConfigurationManager.OpenExeConfiguration(exePath);
             var sectionGroup = configuration.GetSectionGroup("system.net");

@@ -6,6 +6,8 @@
 # Dont Include Quick Start
 *QuickStart/
 
+# Dont include program.cs
+src/NBot.ConsoleAdapter/Program.cs
 
 # mstest test results
 TestResults

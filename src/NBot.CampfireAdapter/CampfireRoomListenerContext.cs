@@ -33,7 +33,7 @@ namespace NBot.CampfireAdapter
         private string GetRoomStreamingUrl()
         {
             // Pick a subdomain at random
-            return string.Format("https://{0}.campfirenow.com/room/{1}/live.json", _availableSubdomains[_random.Next(0, _availableSubdomains.Length)], RoomId);
+            return string.Format("https://{0}.campfirenow.com/room/{1}/live.json", _availableSubdomains[0], RoomId);
         }
 
         private string GetUserAgent()

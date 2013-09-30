@@ -95,17 +95,26 @@ namespace NBot.Core
                     {
                         var inputParameters = new Dictionary<string, string>();
 
-                        if (route is IMessageParameterProvider)
+                        IRoute routeToProcess = route;
+
+                        var roomSecurityRoute = route as IRoomSecurityRoute;
+                       
+                        if (roomSecurityRoute != null)
                         {
-                            inputParameters = ((IMessageParameterProvider)route).GetInputParameters(segment);
+                            routeToProcess = roomSecurityRoute.InnerRoute;
                         }
-                        else if (route is IPipedParameterProvider)
+
+                        if (routeToProcess is IMessageParameterProvider)
                         {
-                            inputParameters = ((IPipedParameterProvider)route).GetInputParameters(previousSegmentOutput);
+                            inputParameters = ((IMessageParameterProvider)routeToProcess).GetInputParameters(segment);
+                        }
+                        else if (routeToProcess is IPipedParameterProvider)
+                        {
+                            inputParameters = ((IPipedParameterProvider)routeToProcess).GetInputParameters(previousSegmentOutput);
                         }
 
                         var routeParameters = BuildParameters(route.EndPoint, segment, client, inputParameters);
-                        route.EndPoint.Invoke(route.Handler, routeParameters);
+                        routeToProcess.EndPoint.Invoke(routeToProcess.Handler, routeParameters);
                     }
 
                 }

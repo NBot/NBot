@@ -93,6 +93,7 @@
     <Compile Include="RobotExtenstions.cs" />
     <Compile Include="Routes\IMessageParameterProvider.cs" />
     <Compile Include="Routes\IPipedParameterProvider.cs" />
+    <Compile Include="Routes\IRoomSecurityRoute.cs" />
     <Compile Include="Routes\IRoute.cs" />
     <Compile Include="Routes\MessageTypeRoute.cs" />
     <Compile Include="Routes\PipedRoute.cs" />

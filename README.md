@@ -1,5 +1,6 @@
 NBot
 ====
+I made this better!!!!
 ## What is NBot?
 NBot is a "port" of git hub's Hubot but targeted at the .NET platform. It acts as a messaging framework for you to add on to. Currently there is an implementation for Campfire and a base set of plugins for you to enjoy.
 

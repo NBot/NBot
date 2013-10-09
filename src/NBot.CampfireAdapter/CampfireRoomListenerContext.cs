@@ -7,8 +7,9 @@ namespace NBot.CampfireAdapter
 {
     public class CampfireRoomListenerContext
     {
-        private readonly Random _random = new Random(DateTime.Now.Millisecond);
-        private readonly string[] _availableSubdomains = { "streaming", "streaming1", "streaming2", "streaming3" };
+        private static readonly string[] AvailableSubdomains = { "streaming", "streaming1", "streaming2", "streaming3" };
+        private static readonly Object SyncRoot = new Object();
+        private static int _nextSubdomainIndex = 0;
 
         public CampfireRoomListenerContext(int roomId, string token, int userId, Action<Message> messageRecieved)
         {
@@ -33,7 +34,7 @@ namespace NBot.CampfireAdapter
         private string GetRoomStreamingUrl()
         {
             // Pick a subdomain at random
-            return string.Format("https://{0}.campfirenow.com/room/{1}/live.json", _availableSubdomains[_random.Next(0, 3)], RoomId);
+            return string.Format("https://{0}.campfirenow.com/room/{1}/live.json", GetNextSubdomain(), RoomId);
         }
 
         private string GetUserAgent()
@@ -47,6 +48,17 @@ namespace NBot.CampfireAdapter
             request.Headers.Add(HttpRequestHeader.Authorization, AuthorizationHeader);
             request.UserAgent = GetUserAgent();
             return request;
+        }
+
+        private string GetNextSubdomain()
+        {
+            string result;
+            lock (SyncRoot)
+            {
+                result = AvailableSubdomains[_nextSubdomainIndex];
+                _nextSubdomainIndex = (_nextSubdomainIndex % AvailableSubdomains.Length) + 1;
+            }
+            return result;
         }
     }
 }

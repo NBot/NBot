@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
+using System.Net;
 using System.Net.Configuration;
 using System.Threading.Tasks;
 using NBot.Core;
@@ -24,6 +25,7 @@ namespace NBot.CampfireAdapter
             _token = token;
             _account = account;
             _roomsToJoin = roomsToJoin;
+            ServicePointManager.DefaultConnectionLimit = 10;
         }
 
         public string Channel { get; private set; }
@@ -32,7 +34,6 @@ namespace NBot.CampfireAdapter
 
         public void StarProduction()
         {
-            IncreaseConnectionLimit();
             var client = new JsonServiceClient("https://{0}.campfirenow.com".FormatWith(_account)) { UserName = _token, Password = "X" };
             var user = client.Get<CampfireUserWrapper>("/users/me.json").User;
 
@@ -63,24 +64,6 @@ namespace NBot.CampfireAdapter
             if (handler != null) handler(message);
         }
 
-        private static void IncreaseConnectionLimit()
-        {
-            string applicationName = Environment.GetCommandLineArgs()[0];
-            string exePath = System.IO.Path.Combine(Environment.CurrentDirectory, applicationName);
-            var configuration = ConfigurationManager.OpenExeConfiguration(exePath);
-            var sectionGroup = configuration.GetSectionGroup("system.net");
 
-            if (sectionGroup != null)
-            {
-                var section = (ConnectionManagementSection)sectionGroup.Sections["connectionManagement"];
-                section.ConnectionManagement.Add(new ConnectionManagementElement("https://streaming.campfirenow.com", 100));
-                section.ConnectionManagement.Add(new ConnectionManagementElement("https://streaming1.campfirenow.com", 100));
-                section.ConnectionManagement.Add(new ConnectionManagementElement("https://streaming2.campfirenow.com", 100));
-                section.ConnectionManagement.Add(new ConnectionManagementElement("https://streaming3.campfirenow.com", 100));
-            }
-
-            configuration.Save(ConfigurationSaveMode.Full);
-            ConfigurationManager.RefreshSection("system.net/connectionManagement");
-        }
     }
 }

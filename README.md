@@ -89,6 +89,7 @@ see [Message Handler](https://github.com/NBot/NBot/wiki/Message-Handler) for mor
 1. [Jonathan Starnes](https://github.com/JonathanStarnes) - Project Lead
 2. [Billy Laney](https://github.com/supabill)
 3. [Tyler Falkenhgen](https://github.com/tfalkenhagen)
+4. [Rafael Torres](https://github.com/rjt011000)
 
 
 ## Open Source Dependencies

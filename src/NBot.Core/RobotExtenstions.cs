@@ -1,12 +1,9 @@
-﻿using System;
+﻿using System.Globalization;
+using NBot.Core.Attributes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Runtime.Remoting.Messaging;
-using System.Web;
-using System.Web.UI;
-using NBot.Core.Attributes;
-using ServiceStack.Common.Extensions;
 
 namespace NBot.Core
 {
@@ -45,7 +42,7 @@ namespace NBot.Core
 
             public IRobotConfiguration AllowedInRooms(params int[] rooms)
             {
-                var allowedRooms = rooms.Select(r => r.ToString()).ToArray();
+                var allowedRooms = rooms.Select(r => r.ToString(CultureInfo.InvariantCulture)).ToArray();
                 return AllowedInRooms(allowedRooms);
             }
 

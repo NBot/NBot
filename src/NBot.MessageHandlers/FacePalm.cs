@@ -1,8 +1,8 @@
-﻿using System.Net;
-using NBot.Core;
+﻿using NBot.Core;
 using NBot.Core.Attributes;
 using NBot.Core.Help;
-using ServiceStack.Service;
+using ServiceStack;
+using System.Net;
 
 namespace NBot.MessageHandlers
 {

@@ -2,7 +2,7 @@
 using NBot.Core;
 using NBot.Core.Attributes;
 using NBot.Core.Help;
-using ServiceStack.Service;
+using ServiceStack;
 using ServiceStack.Text;
 
 namespace NBot.MessageHandlers
@@ -10,7 +10,9 @@ namespace NBot.MessageHandlers
     [Tag("Fun", "Joke", "XKCD", "Comic")]
     public class Xkcd : MessageHandler
     {
-        [Help(Syntax = "<xkcd me <Optional: Number>", Description = "Displays the latest XKCD.com comic or the specific Xkcd comic number if provided.", Example = "nbot xkcd me 600")]
+        [Help(Syntax = "<xkcd me <Optional: Number>",
+            Description = "Displays the latest XKCD.com comic or the specific Xkcd comic number if provided.",
+            Example = "nbot xkcd me 600")]
         [Respond("(xkcd me)( )?{{number}}?")]
         public void XkcdMe(Message message, IMessageClient client, string number)
         {
@@ -18,21 +20,21 @@ namespace NBot.MessageHandlers
             var result = new RootObject();
 
             string jsonResponse;
-            
+
             try
             {
                 jsonResponse = (string.IsNullOrEmpty(number) || number == "xkcd me")
-                          ? jsonClient.Get<string>("/info.0.json")
-                          : jsonClient.Get<string>(string.Format("/{0}/info.0.json", number));   
+                    ? jsonClient.Get<string>("/info.0.json")
+                    : jsonClient.Get<string>(string.Format("/{0}/info.0.json", number));
             }
-            catch(Exception)
+            catch (Exception)
             {
-                 jsonResponse = jsonClient.Get<string>("/1/info.0.json");               
+                jsonResponse = jsonClient.Get<string>("/1/info.0.json");
             }
 
-            result.value = JsonObject.Parse(jsonResponse);
-            var imgUrl = result.value.Child("img").Replace("\\", "");
-            var altText = result.value.Child("alt");
+            result.Value = JsonObject.Parse(jsonResponse);
+            string imgUrl = result.Value.Child("img").Replace("\\", "");
+            string altText = result.Value.Child("alt");
 
             //Reply with two messages back to back
             client.ReplyTo(message, imgUrl);
@@ -41,8 +43,8 @@ namespace NBot.MessageHandlers
 
         private class RootObject
         {
-            public string type { get; set; }
-            public JsonObject value { get; set; }
+            public string Type { get; set; }
+            public JsonObject Value { get; set; }
         }
 
         //{"month": "11", "num": 1294, "link": "", "year": "2013", "news": "", "safe_title": "Telescope Names", 
@@ -51,18 +53,17 @@ namespace NBot.MessageHandlers
 
         private class Value
         {
-            public int month { get; set; }
-            public string num { get; set; }
-            public string link { get; set; }
-            public string year { get; set; }
-            public string news { get; set; }
-            public string safe_title { get; set; }
-            public string transcript { get; set; }
-            public string alt { get; set; }
-            public string img { get; set; }
-            public string title { get; set; }
-            public string day { get; set; }
+            public int Month { get; set; }
+            public string Num { get; set; }
+            public string Link { get; set; }
+            public string Year { get; set; }
+            public string News { get; set; }
+            public string SafeTitle { get; set; }
+            public string Transcript { get; set; }
+            public string Alt { get; set; }
+            public string Img { get; set; }
+            public string Title { get; set; }
+            public string Day { get; set; }
         }
- 
     }
 }

@@ -1,13 +1,11 @@
-﻿using System;
+﻿using NBot.Core.Attributes;
+using NBot.Core.Brains;
+using NBot.Core.MessageFilters;
+using NBot.Core.Routes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using NBot.Core.Attributes;
-using NBot.Core.Brains;
-using NBot.Core.Logging;
-using NBot.Core.MessageFilters;
-using NBot.Core.Routes;
-using ServiceStack.Validation;
 
 namespace NBot.Core
 {
@@ -69,13 +67,13 @@ namespace NBot.Core
         {
             try
             {
-                IAdapter adapter = _adapters[message.Channel];
+                var adapter = _adapters[message.Channel];
                 var pipeline = message.Content.Split(new[] { '|' }, StringSplitOptions.RemoveEmptyEntries);
 
                 IMessageClient client = null;
-                string[] previousSegmentOutput = new string[] { };
+                var previousSegmentOutput = new string[] { };
 
-                for (int segmentIndex = 0; segmentIndex < pipeline.Length; segmentIndex++)
+                for (var segmentIndex = 0; segmentIndex < pipeline.Length; segmentIndex++)
                 {
                     var segment = message.CloneWithNewContent(pipeline[segmentIndex]);
                     var pipedMessageClient = client as PipedMessageClient;
@@ -95,7 +93,7 @@ namespace NBot.Core
                     {
                         var inputParameters = new Dictionary<string, string>();
 
-                        IRoute routeToProcess = route;
+                        var routeToProcess = route;
 
                         var roomSecurityRoute = route as IRoomSecurityRoute;
                        
@@ -127,10 +125,10 @@ namespace NBot.Core
 
         private object[] BuildParameters(MethodInfo method, Message message, IMessageClient client, Dictionary<string, string> inputParameters)
         {
-            ParameterInfo[] methodParameters = method.GetParameters();
+            var methodParameters = method.GetParameters();
             var result = new object[methodParameters.Count()];
 
-            for (int parameterIndex = 0; parameterIndex < result.Length; parameterIndex++)
+            for (var parameterIndex = 0; parameterIndex < result.Length; parameterIndex++)
             {
                 ParameterInfo parameter = methodParameters[parameterIndex];
 
@@ -146,9 +144,13 @@ namespace NBot.Core
                 {
                     result[parameterIndex] = _brain;
                 }
-                else if (inputParameters.ContainsKey(parameter.Name))
+                else
                 {
-                    result[parameterIndex] = Convert.ChangeType(inputParameters[parameter.Name], parameter.ParameterType);
+                    string value;
+                    if (inputParameters.TryGetValue(parameter.Name, out value))
+                    {
+                        result[parameterIndex] = Convert.ChangeType(value, parameter.ParameterType);
+                    }
                 }
             }
 

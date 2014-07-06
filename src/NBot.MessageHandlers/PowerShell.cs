@@ -1,10 +1,8 @@
-﻿using System;
+﻿using NBot.Core;
+using NBot.Core.Attributes;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using NBot.Core;
-using NBot.Core.Attributes;
 
 namespace NBot.MessageHandlers
 {
@@ -18,7 +16,7 @@ namespace NBot.MessageHandlers
             _commands = new Dictionary<string, string>();
             build(_commands);
         }
-
+       
         [Respond("exec {{command}}\\((?<parameters>(\"?[\\w\\d]+\"?)(,\\s*\"?[\\w\\d]+\"?)*)\\)")]
         [Respond("exec {{command}}")]
         public void HandlePowerShellCommand(Message message, IMessageClient client, string command, string parameters)
@@ -30,7 +28,7 @@ namespace NBot.MessageHandlers
 
                 var startInfo = new ProcessStartInfo();
                 startInfo.FileName = "powershell.exe";
-                startInfo.Arguments = string.Format("-File {0} {1}", filePath, scriptParameters);
+                startInfo.Arguments = string.Format("-ExecutionPolicy RemoteSigned -File {0} {1}", filePath, scriptParameters);
                 startInfo.RedirectStandardOutput = true;
                 startInfo.UseShellExecute = false;
                 var process = Process.Start(startInfo);

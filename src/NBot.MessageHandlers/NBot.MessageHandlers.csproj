@@ -87,6 +87,7 @@
     <Compile Include="Sosearch.cs" />
     <Compile Include="Swanson.cs" />
     <Compile Include="WhySoMean.cs" />
+    <Compile Include="Xkcd.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\NBot.Core\NBot.Core.csproj">

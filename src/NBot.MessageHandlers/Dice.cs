@@ -1,10 +1,8 @@
-﻿using System;
-using System.Threading;
-using NBot.Core;
+﻿using NBot.Core;
 using NBot.Core.Attributes;
 using NBot.Core.Help;
-using ServiceStack.Service;
-using ServiceStack.Text;
+using System;
+using System.Threading;
 
 namespace NBot.MessageHandlers
 {
@@ -27,7 +25,7 @@ namespace NBot.MessageHandlers
                 if (numSides <= 0)
                 {
                     //negative number
-                    var result = "I'm sorry, i will not roll a " + numSides.ToString() +
+                    var result = "I'm sorry, I will not roll a " + numSides.ToString() +
                                  " sided dice without adult supervision. That would tear a hole in the universe...";
                     
                     client.ReplyTo(message, result);
@@ -49,7 +47,6 @@ namespace NBot.MessageHandlers
                 var result = "I can't roll a " + sides + " I am but a meager .net bot";
                 client.ReplyTo(message, result);
             }
-            
         }
     }
 }

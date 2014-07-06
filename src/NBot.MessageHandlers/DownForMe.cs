@@ -26,7 +26,7 @@ namespace NBot.MessageHandlers
                 Match match = Regex.Match(result, SiteIsUpReges);
                 client.ReplyTo(message, match.Success ? string.Format("It's just you. {0} is up for me.", site) : string.Format("Oh no {0} is down for me too!!!!! *PANIC*", site));
             }
-            catch (Exception e)
+            catch
             {
                 client.Send("Oh no I am Down!!! *UberPanic*", message.RoomId);
             }

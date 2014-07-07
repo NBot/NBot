@@ -1,15 +1,8 @@
-﻿using System;
+﻿using NBot.Core;
 using System.Collections.Generic;
-using System.Configuration;
-using System.Linq;
 using System.Net;
-using System.Net.Configuration;
 using System.Threading.Tasks;
-using NBot.Core;
-using ServiceStack.Common;
-using ServiceStack.Common.Extensions;
-using ServiceStack.ServiceClient.Web;
-using ServiceStack.Text;
+using ServiceStack;
 
 namespace NBot.CampfireAdapter
 {

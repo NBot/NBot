@@ -1,14 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
 using NBot.Core;
 using NBot.Core.Attributes;
 using NBot.Core.Help;
-using ServiceStack.Service;
+using ServiceStack;
 
 namespace NBot.MessageHandlers
 {
-    [Tag("Fun","Meme")]
+    [Tag("Fun", "Meme")]
     public class MemeGenerator : MessageHandler
     {
         [Help(Syntax = "FindMemeGenerator <Url>",
@@ -34,26 +33,26 @@ namespace NBot.MessageHandlers
         [Respond("pity( me)?( {{phrase}})?")]
         public void PityTheFool(Message message, IMessageClient client, string phrase)
         {
-            var pity = GetRandomItem(new List<string>
-                {
-                    "I Pity The Fool",
-                    "Pity The Fool",
-                    "Thou Shalt pity the fool",
-                    "Pity thee",
-                    "Be pitiful for those",
-                    "cast pity towards those"
-                });
+            string pity = GetRandomItem(new List<string>
+            {
+                "I Pity The Fool",
+                "Pity The Fool",
+                "Thou Shalt pity the fool",
+                "Pity thee",
+                "Be pitiful for those",
+                "cast pity towards those"
+            });
 
             if (string.IsNullOrEmpty(phrase))
             {
                 phrase = GetRandomItem(new List<string>
-                    {
-                        "who breaks the build",
-                        "who doesn't test before check-in",
-                        "who is last to the dessert tray",
-                        "who doesn't login to campfire",
-                        "who isn't nBot"
-                    });
+                {
+                    "who breaks the build",
+                    "who doesn't test before check-in",
+                    "who is last to the dessert tray",
+                    "who doesn't login to campfire",
+                    "who isn't nBot"
+                });
             }
 
             MemeGen(message, client, "1646", "5353", pity, phrase);
@@ -77,7 +76,8 @@ namespace NBot.MessageHandlers
             MemeGen(message, client, "45", "20", phrase1, phrase2);
         }
 
-        private void MemeGen(Message message, IMessageClient client, string generatorId, string imageId, string text0, string text1)
+        private void MemeGen(Message message, IMessageClient client, string generatorId, string imageId, string text0,
+            string text1)
         {
             IRestClient httpClient =
                 GetJsonServiceClient(
@@ -92,7 +92,7 @@ namespace NBot.MessageHandlers
 
             client.ReplyTo(message, response.Result.InstanceImageUrl);
         }
-            
+
         [DataContract]
         internal class MemeGeneratorResponse
         {

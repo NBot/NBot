@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Net;
 using NBot.Core;
-using ServiceStack.ServiceClient.Web;
-using ServiceStack.Text;
+using ServiceStack;
 
 namespace NBot.CampfireAdapter
 {
@@ -15,7 +12,6 @@ namespace NBot.CampfireAdapter
         public CampfireMessageClient(string token, string account)
         {
             _client = new JsonServiceClient("https://{0}.campfirenow.com".FormatWith(account)) { UserName = token, Password = "X" };
-
         }
 
         public void Send(string message, string roomId, string user = null)

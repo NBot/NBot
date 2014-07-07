@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
-using ServiceStack.Text;
+using ServiceStack;
 
 namespace NBot.Core.Brains
 {

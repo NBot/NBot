@@ -5,18 +5,18 @@ using NBot.Core.Brains;
 using NBot.Core.Help;
 using NBot.Core.Logging;
 using NBot.Core.MessageFilters;
-using ServiceStack.Text;
+using ServiceStack;
 using Topshelf;
 
 namespace NBot.Core
 {
     public class Robot : IRobotConfiguration, IRobotHost
     {
+        private static readonly Dictionary<string, object> Settings = new Dictionary<string, object>();
         private readonly string _environment;
+        private readonly Dictionary<string, HelpInformation> _helpers = new Dictionary<string, HelpInformation>();
         private readonly List<IMessageProducer> _producers = new List<IMessageProducer>();
         private readonly IMessageRouter _router;
-        private static readonly Dictionary<string, object> _settings = new Dictionary<string, object>();
-        private readonly Dictionary<string, HelpInformation> _helpers = new Dictionary<string, HelpInformation>();
 
         private Robot(string name, string alias, string environment = "debug")
         {
@@ -31,22 +31,12 @@ namespace NBot.Core
         public static string Alias { get; set; }
         public static INBotLog Log { get; private set; }
 
-        public static T GetSetting<T>(string key)
-        {
-            if (_settings.ContainsKey(key))
-            {
-                return _settings[key] is T ? (T)_settings[key] : default(T);
-            }
-
-            return default(T);
-        }
-
         public IRobotConfiguration AddSetting<T>(string key, T value)
         {
-            if (_settings.ContainsKey(key))
+            if (Settings.ContainsKey(key))
                 throw new ApplicationException("There is already a setting with that key.");
 
-            _settings.Add(key, value);
+            Settings.Add(key, value);
 
             return this;
         }
@@ -64,7 +54,7 @@ namespace NBot.Core
             return this;
         }
 
-        public IRobotConfiguration RegisterHandler(IMessageHandler handler, params string[]  allowedRooms)
+        public IRobotConfiguration RegisterHandler(IMessageHandler handler, params string[] allowedRooms)
         {
             UpdateHelpInformation(handler);
             _router.RegisterMessageHandler(handler, allowedRooms);
@@ -117,6 +107,18 @@ namespace NBot.Core
             }
         }
 
+        public static T GetSetting<T>(string key)
+        {
+            object value;
+
+            if (Settings.TryGetValue(key, out value))
+            {
+                return value is T ? (T) value : default(T);
+            }
+
+            return default(T);
+        }
+
         public static IRobotConfiguration Create(string name, string alias, string environment = "debug")
         {
             return new Robot(name, alias, environment);
@@ -129,12 +131,11 @@ namespace NBot.Core
 
         private void UpdateHelpInformation(IMessageHandler handler)
         {
-            var type = handler.GetType();
+            Type type = handler.GetType();
 
-            foreach (var methodInfo in type.GetMethods(BindingFlags.Instance | BindingFlags.Public))
+            foreach (MethodInfo methodInfo in type.GetMethods(BindingFlags.Instance | BindingFlags.Public))
             {
-
-                object[] helpAttributes = methodInfo.GetCustomAttributes(typeof(HelpAttribute), true);
+                object[] helpAttributes = methodInfo.GetCustomAttributes(typeof (HelpAttribute), true);
 
                 if (!_helpers.ContainsKey(type.Name))
                 {
@@ -149,7 +150,8 @@ namespace NBot.Core
 
                 foreach (HelpAttribute helpAttribute in helpAttributes)
                 {
-                    _helpers[type.Name].Commands.Add(new Command(helpAttribute.Syntax.FormatWith(Name, Alias), helpAttribute.Description.FormatWith(Name, Alias), helpAttribute.Example.FormatWith(Name, Alias)));
+                    _helpers[type.Name].Commands.Add(new Command(helpAttribute.Syntax.FormatWith(Name, Alias),
+                        helpAttribute.Description.FormatWith(Name, Alias), helpAttribute.Example.FormatWith(Name, Alias)));
                 }
             }
         }

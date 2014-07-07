@@ -1,22 +1,25 @@
 ﻿using System.Collections.Generic;
-using ServiceStack.Text;
+using ServiceStack;
 
 namespace NBot.Core
 {
     /// <summary>
-    /// This client will all a passthrough of everything that is not a send or a broadcast. 
-    /// Instead it is captured so it can be piped into the next command
+    ///     This client will all a passthrough of everything that is not a send or a broadcast.
+    ///     Instead it is captured so it can be piped into the next command
     /// </summary>
     public class PipedMessageClient : IMessageClient
     {
         private readonly IMessageClient _innerClient;
         private readonly SortedSet<string> _output = new SortedSet<string>();
 
-        public string[] Output { get { return _output.ToArray(); } }
-
         public PipedMessageClient(IMessageClient innerClient)
         {
             _innerClient = innerClient;
+        }
+
+        public string[] Output
+        {
+            get { return _output.ToArray(); }
         }
 
         public void Send(string message, string roomId, string user = null)

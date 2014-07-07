@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
-using ServiceStack.Service;
-using ServiceStack.ServiceClient.Web;
+using ServiceStack;
 
 namespace NBot.Core
 {
@@ -18,11 +17,13 @@ namespace NBot.Core
         {
             var result = new JsonServiceClient(baseurl)
             {
-                LocalHttpWebRequestFilter = request =>
-                {
-                    request.AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate;
-                }
+                RequestFilter =
+                    request =>
+                    {
+                        request.AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate;
+                    }
             };
+
             return result;
         }
 

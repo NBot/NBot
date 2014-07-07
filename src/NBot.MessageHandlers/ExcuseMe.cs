@@ -2,7 +2,7 @@
 using NBot.Core;
 using NBot.Core.Attributes;
 using NBot.Core.Help;
-using ServiceStack.Service;
+using ServiceStack;
 
 namespace NBot.MessageHandlers
 {

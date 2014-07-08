@@ -65,6 +65,8 @@ namespace NBot.Core
 
         private void OnMessageProduced(Message message)
         {
+            Robot.Log.WriteInfo(string.Format("Message Produced - RoomId:{0}, UserId:{1}, Content:'{2}'", message.RoomId, message.UserId, message.Content));
+
             try
             {
                 var adapter = _adapters[message.Channel];
@@ -91,12 +93,14 @@ namespace NBot.Core
 
                     foreach (var route in _routes.Where(r => r.IsMatch(segment)))
                     {
+                        Robot.Log.WriteInfo(string.Format("Route Handled - RoomId:{0}, UserId:{1}, Content:'{2}', Route:'{3}", message.RoomId, message.UserId, message.Content, route.EndPoint.Name));
+
                         var inputParameters = new Dictionary<string, string>();
 
                         var routeToProcess = route;
 
                         var roomSecurityRoute = route as IRoomSecurityRoute;
-                       
+
                         if (roomSecurityRoute != null)
                         {
                             routeToProcess = roomSecurityRoute.InnerRoute;
@@ -114,7 +118,6 @@ namespace NBot.Core
                         var routeParameters = BuildParameters(route.EndPoint, segment, client, inputParameters);
                         routeToProcess.EndPoint.Invoke(routeToProcess.Handler, routeParameters);
                     }
-
                 }
             }
             catch (Exception e)

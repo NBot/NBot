@@ -70,8 +70,9 @@ namespace NBot.CampfireAdapter
                     }
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Robot.Log.WriteError(string.Format("An error occured when listening in room {0}", context.RoomId), ex);
                 Thread.Sleep(1000);
                 Listen(context);
             }

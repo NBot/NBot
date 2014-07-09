@@ -56,7 +56,7 @@ namespace NBot.CampfireAdapter
             lock (SyncRoot)
             {
                 result = AvailableSubdomains[_nextSubdomainIndex];
-                _nextSubdomainIndex = (_nextSubdomainIndex % AvailableSubdomains.Length) + 1;
+                _nextSubdomainIndex = (_nextSubdomainIndex + 1) % AvailableSubdomains.Length;
             }
             return result;
         }

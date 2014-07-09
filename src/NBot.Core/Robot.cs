@@ -82,8 +82,16 @@ namespace NBot.Core
                 config.Service<IRobotHost>(s =>
                 {
                     s.ConstructUsing(x => this);
-                    s.WhenStarted(x => x.StartHost());
-                    s.WhenStopped(x => x.StopHost());
+                    s.WhenStarted(x =>
+                    {
+                        Log.WriteInfo("Starting Service..");
+                        x.StartHost();
+                    });
+                    s.WhenStopped(x =>
+                    {
+                        Log.WriteInfo("Stoping Service..");
+                        x.StopHost();
+                    });
                 });
 
                 config.SetServiceName("{0}_Service".FormatWith(Name));

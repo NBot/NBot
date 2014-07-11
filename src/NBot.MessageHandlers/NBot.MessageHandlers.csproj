@@ -66,6 +66,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Dice.cs" />
+    <Compile Include="Echo.cs" />
     <Compile Include="PirateTranslator.cs" />
     <Compile Include="MemeGenerator.cs" />
     <Compile Include="Status.cs" />

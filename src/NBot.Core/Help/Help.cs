@@ -16,7 +16,7 @@ namespace NBot.Core.Help
             _helpInformation = helpInformation;
         }
 
-        [Respond("(help|commands)")]
+        [Respond("(help|commands)$")]
         public void MainHelpMenu(Message message, IMessageClient client)
         {
             string response = _helpInformation.Aggregate("List of Plugins. Please use help <plugin> for more information.", (current, helpInformation) => current + ("\n\t-" + helpInformation.Plugin));

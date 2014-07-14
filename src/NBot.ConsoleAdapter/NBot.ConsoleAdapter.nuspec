@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>NBot.CampfireAdapter</id>
+    <version>$version$</version>
+    <title>NBot.ConsoleAdapter</title>
+    <authors>Jonathan Starnes, Billy Laney, Tyler Falkenhagen, Rafael Torres, et al.</authors>
+    <owners>Jonathan Starnes</owners>
+    <licenseUrl>https://raw.githubusercontent.com/NBot/NBot/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/NBot/NBot</projectUrl>
+    <iconUrl>https://avatars1.githubusercontent.com/u/5455259?s=140</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Console Adapter for the NBot chatbot.</description>
+    <copyright>Copyright 2014</copyright>
+    <tags>NBot HuBot Bot chat</tags>
+  </metadata>
+</package>

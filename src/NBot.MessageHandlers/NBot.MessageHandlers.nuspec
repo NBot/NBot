@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package >
   <metadata>
-    <id>NBot.CampfireAdapter</id>
+    <id>NBot.MessageHandlers</id>
     <version>$version$</version>
     <title>NBot.MessageHandlers</title>
     <authors>Jonathan Starnes, Billy Laney, Tyler Falkenhagen, Rafael Torres, et al.</authors>

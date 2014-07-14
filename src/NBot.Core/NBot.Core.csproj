@@ -64,7 +64,6 @@
     <Compile Include="Help\HelpInformation.cs" />
     <Compile Include="IRobotConfiguration.cs" />
     <Compile Include="IRobotHost.cs" />
-    <Compile Include="IRobot.cs" />
     <Compile Include="Logging\ConsoleLog.cs" />
     <Compile Include="Logging\INBotLog.cs" />
     <Compile Include="MessageClientExtensions.cs" />
@@ -77,13 +76,11 @@
     <Compile Include="MessageFilters\RegexReplacementMessageFilter.cs" />
     <Compile Include="IAdapter.cs" />
     <Compile Include="Message.cs" />
-    <Compile Include="IMessageRouter.cs" />
     <Compile Include="IMessageClient.cs" />
     <Compile Include="IMessageHandler.cs" />
     <Compile Include="IMessageProducer.cs" />
     <Compile Include="IEntity.cs" />
     <Compile Include="MessageHandler.cs" />
-    <Compile Include="MessageRouter.cs" />
     <Compile Include="PipedMessageClient.cs" />
     <Compile Include="Robot.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

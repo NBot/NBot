@@ -55,7 +55,7 @@ namespace NBot.Core
             {
                 foreach (var handler in _handlers)
                 {
-                    _configuration.RegisterHandler(handler, allowedRooms);
+                    _configuration.RegisterMessageHandler(handler, allowedRooms);
                 }
 
                 return _configuration;

@@ -13,5 +13,13 @@
     <description>Campfire Adapter for the NBot chatbot.</description>
     <copyright>Copyright 2014</copyright>
     <tags>NBot HuBot Bot chat</tags>
-  </metadata>
+    <dependencies> 
+      <group targetFramework="net40">
+        <dependency id="ServiceStack.Client" version="4.0.23" />
+        <dependency id="ServiceStack.Common" version="4.0.23" />
+        <dependency id="ServiceStack.Interfaces" version="4.0.23"  />
+        <dependency id="ServiceStack.Text" version="4.0.23"  />
+      </group>
+    </dependencies>
+    </metadata>
 </package>

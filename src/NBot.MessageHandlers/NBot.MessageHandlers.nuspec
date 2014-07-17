@@ -15,7 +15,7 @@
     <tags>NBot HuBot Bot chat</tags>
      <dependencies> 
       <group targetFramework="net40">
-        <dependency id="NBot.Core" />
+        <dependency id="NBot.Core" version="[$version$]"/>
       </group>
     </dependencies>
   </metadata>

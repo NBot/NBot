@@ -57,7 +57,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\NBot.Core\NBot.Core.csproj">
+    <ProjectReference Include="..\..\NBot.Core\NBot.Core.csproj">
       <Project>{DCEA0219-7995-471B-B765-A9E6CE478C41}</Project>
       <Name>NBot.Core</Name>
     </ProjectReference>

@@ -16,7 +16,7 @@ NBot is a "port" of git hub's Hubot but targeted at the .NET platform. It acts a
 4. Create [Message Filters](https://github.com/NBot/NBot/wiki/MessageFilter)
 
 ## Quick Start - Console Setup
-* Set ConsoleAdapter Project as the Startup Project
+* Set NBot.Console Project as the Startup Project
 * Use the Fluent interface to configure your NBot
 * Chat Bot Bliss....
 
@@ -29,8 +29,8 @@ static void Main(string[] args)
 
     Robot.Create("NBot")
         .UseBrain(brain) // <- Use your brain
+        .UseConsoleAdapter() // <- Use a console adapter
         .RegisterMessageFilter(new HandleBarsMessageFilter(brain)) // <- Register zero or more Message Filters
-        .RegisterAdapter(new ConsoleAdapter(), "ConsoleChannel") // <- Register one ore more Adapters
         .RegisterHandlersInAssembly(Assembly.Load("NBot.MessageHandlers")) // <- Register all the Handlers
         .AllowedInAllRooms() // <- Allow them in all rooms
         .Run(); // <- Get Crackin

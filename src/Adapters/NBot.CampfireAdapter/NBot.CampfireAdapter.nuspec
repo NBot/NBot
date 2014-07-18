@@ -19,7 +19,7 @@
         <dependency id="ServiceStack.Common" version="4.0.23" />
         <dependency id="ServiceStack.Interfaces" version="4.0.23"  />
         <dependency id="ServiceStack.Text" version="4.0.23"  />
-        <dependency id="NBot.Core" version="$version$"  />
+        <dependency id="NBot.Core" />
       </group>
     </dependencies>
     </metadata>

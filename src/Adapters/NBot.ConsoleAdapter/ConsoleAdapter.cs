@@ -1,6 +1,7 @@
-﻿using NBot.Core;
+﻿using NBot.ConsoleAdapter;
+using NBot.Core;
 
-namespace NBot.ConsoleAdapter
+namespace NBot.Adapters
 {
     public class ConsoleAdapter : IAdapter
     {

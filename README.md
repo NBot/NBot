@@ -31,6 +31,7 @@ static void Main(string[] args)
                 .RegisterHandlersInAssembly(Assembly.Load("NBot.MessageHandlers")) // <- Register all the Handlers
                 .AllowedInAllRooms() // <- Allow them in all rooms
                 .Run(); //<- Get Crackin
+}
 ```
 See [Configration](https://github.com/NBot/NBot/wiki/Configuration) for more details.
 

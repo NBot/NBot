@@ -11,9 +11,7 @@ namespace NBot.Core.Attributes
 
         public RespondAttribute(string pattern)
         {
-            string name = "nbot";
-            string alias = "bot";
-            _pattern = string.Format("^[@]?(?:{0}[:,]?|{1}[:,]?)\\s*(?:{2})", alias, name, pattern);
+            _pattern = string.Format("^[@]?(?:{0}[:,]?|{1}[:,]?)\\s*(?:{2})", Robot.Alias, Robot.Name, pattern);
         }
 
         public override IRoute CreateRoute(IMessageHandler handler, MethodInfo endpoint)

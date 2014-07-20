@@ -42,6 +42,7 @@
       <HintPath>..\..\packages\ServiceStack.Text.4.0.23\lib\net40\ServiceStack.Text.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="Topshelf, Version=3.1.122.0, Culture=neutral, PublicKeyToken=b800c4cfcdeea87b, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -61,7 +62,6 @@
     <Compile Include="Help\Help.cs" />
     <Compile Include="Help\HelpAttribute.cs" />
     <Compile Include="Help\HelpInformation.cs" />
-    <Compile Include="IRobotConfiguration.cs" />
     <Compile Include="IRobotHost.cs" />
     <Compile Include="Logging\ConsoleLog.cs" />
     <Compile Include="Logging\INBotLog.cs" />
@@ -80,10 +80,14 @@
     <Compile Include="IMessageProducer.cs" />
     <Compile Include="IEntity.cs" />
     <Compile Include="MessageHandler.cs" />
+    <Compile Include="MessageHandlerRegistration.cs" />
+    <Compile Include="MessageHandlerRoomAuthorization.cs" />
     <Compile Include="PipedMessageClient.cs" />
     <Compile Include="Robot.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RobotExtenstions.cs" />
+    <Compile Include="RobotBuilder.cs" />
+    <Compile Include="RobotConfiguration.cs" />
+    <Compile Include="RobotBuilderExtenstions.cs" />
     <Compile Include="Routes\IMessageParameterProvider.cs" />
     <Compile Include="Routes\IPipedParameterProvider.cs" />
     <Compile Include="Routes\IRoomSecurityRoute.cs" />

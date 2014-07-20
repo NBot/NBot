@@ -44,17 +44,13 @@ See [Configration](https://github.com/NBot/NBot/wiki/Configuration) for more det
 ```
 static void Main(string[] args)
 {
-    // New up a brain to use
-    var brain = new SimpleBrain();
-    IAdapter adapter = new CampfireAdapter.CampfireAdapter("TOKEN", "SUBDOMAIN", new List<int>() { ROOMS_TO_JOIN });
-
-    Robot.Create("NAME", "ALIAS", "ENVIRONMENT")
-        .UseBrain(brain) // <- Use your brain
-        .RegisterMessageFilter(new HandleBarsMessageFilter(brain)) // <- Register zero or more Message Filters
-        .RegisterAdapter(adapter, "Campfire") // <- Register one ore more Adapters
-        .RegisterHandlersInAssembly(Assembly.Load("NBot.MessageHandlers")) // <- Register all the Handlers
-        .AllowedInAllRooms() // <- Allow them in all rooms
-        .Run(); // <- Get Crackin
+            Robot.Create()
+                .UseFileBrain() // <- Pick a brain or the robot will choose one for you
+                .UseCampfireAdapter("TOKEN","SUBDOMAIN",new List<int>() { ROOMS_TO_JOIN }) // <- Pick an adapter or the robot will choose one for you
+                .RegisterMessageFilter(rc => new HandleBarsMessageFilter(rc.Brain)) // <- Register zero or more Message Filters
+                .RegisterHandlersInAssembly(Assembly.Load("NBot.MessageHandlers")) // <- Register all the Handlers
+                .AllowedInAllRooms() // <- Allow them in all rooms
+                .Run(); //<- Get Crackin
 }
 
 ```

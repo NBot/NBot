@@ -24,17 +24,13 @@ NBot is a "port" of git hub's Hubot but targeted at the .NET platform. It acts a
 ```
 static void Main(string[] args)
 {
-    // New up a brain to use
-    var brain = new FileBrain(".\\Brain");
-
-    Robot.Create("NBot")
-        .UseBrain(brain) // <- Use your brain
-        .UseConsoleAdapter() // <- Use a console adapter
-        .RegisterMessageFilter(new HandleBarsMessageFilter(brain)) // <- Register zero or more Message Filters
-        .RegisterHandlersInAssembly(Assembly.Load("NBot.MessageHandlers")) // <- Register all the Handlers
-        .AllowedInAllRooms() // <- Allow them in all rooms
-        .Run(); // <- Get Crackin
-}
+            Robot.Create()
+                .UseFileBrain() // <- Pick a brain or the robot will choose one for you
+                .UseConsoleAdapter() // <- Pick an adapter or the robot will choose one for you
+                .RegisterMessageFilter(rc => new HandleBarsMessageFilter(rc.Brain)) // <- Register zero or more Message Filters
+                .RegisterHandlersInAssembly(Assembly.Load("NBot.MessageHandlers")) // <- Register all the Handlers
+                .AllowedInAllRooms() // <- Allow them in all rooms
+                .Run(); //<- Get Crackin
 ```
 See [Configration](https://github.com/NBot/NBot/wiki/Configuration) for more details.
 

@@ -1,8 +1,7 @@
 ﻿using System.Text.RegularExpressions;
 using NBot.Core.Brains;
-using NBot.Core.MessageFilters;
 
-namespace NBot.Core.Messaging.ContentFilters
+namespace NBot.Core.MessageFilters
 {
     public class HandleBarsMessageFilter : IMessageFilter
     {

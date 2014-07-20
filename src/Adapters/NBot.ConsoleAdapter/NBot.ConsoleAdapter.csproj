@@ -45,7 +45,7 @@
     <Compile Include="ConsoleMessageClient.cs" />
     <Compile Include="ConsoleMessageProducer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RobotExtensions.cs" />
+    <Compile Include="RobotBuilderExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\NBot.Core\NBot.Core.csproj">

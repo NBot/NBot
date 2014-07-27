@@ -1,8 +1,6 @@
 ﻿using System.Reflection;
 using NBot.Core;
-using NBot.Core.Brains;
 using NBot.Core.MessageFilters;
-using NBot.MessageHandlers;
 
 namespace NBot.Console
 {

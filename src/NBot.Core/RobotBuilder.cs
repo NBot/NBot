@@ -24,6 +24,7 @@ namespace NBot.Core
         public RobotBuilder(string name = "nbot", string alias = "nbot", string environment = "debug")
         {
             _configuration = new RobotConfiguration(name, alias, environment);
+            LoadSettings();
         }
 
 
@@ -39,10 +40,20 @@ namespace NBot.Core
             return this;
         }
 
+        public RobotBuilder UseBrain(Func<Dictionary<string, object>, IBrain> brainActivation)
+        {
+            return UseBrain(brainActivation(_configuration.Settings));
+        }
+
         public RobotBuilder UseLog(INBotLog log)
         {
             _configuration.Log = log;
             return this;
+        }
+
+        public RobotBuilder UseLog(Func<Dictionary<string, object>, INBotLog> logActivation)
+        {
+            return UseLog(logActivation(_configuration.Settings));
         }
 
         public RobotBuilder RegisterAdapter(string channel, IAdapter adapter)
@@ -81,20 +92,18 @@ namespace NBot.Core
 
         public Robot Build()
         {
-            LoadSettings();
-            
-            var result = new Robot(_configuration.Name, 
-                _configuration.Alias, 
-                _configuration.Environment, 
-                _configuration.Settings, 
-                _configuration.Brain, 
+            var result = new Robot(_configuration.Name,
+                _configuration.Alias,
+                _configuration.Environment,
+                _configuration.Settings,
+                _configuration.Brain,
                 _configuration.Log);
 
 
             var filters = BuildFilters();
             var routes = BuildRoutes().Union(BuildRoute(new Help.Help(_helpers.Values), null)).ToList();
             var adapters = BuildAdapters(filters.ToList());
-            
+
             result.Initalize(routes, adapters);
 
             return result;

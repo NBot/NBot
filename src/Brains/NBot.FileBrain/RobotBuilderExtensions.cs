@@ -1,5 +1,4 @@
 ﻿using NBot.Core;
-using NBot.Core.Brains;
 
 namespace NBot
 {
@@ -12,7 +11,7 @@ namespace NBot
 
         public static RobotBuilder UseFileBrain(this RobotBuilder configuration, string filePath)
         {
-            return configuration.UseBrain(new FileBrain(filePath));
+            return configuration.UseBrain(new FileBrain.FileBrain(filePath));
         }
     }
 }

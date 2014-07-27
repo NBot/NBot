@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
+using NBot.Core.Brains;
 using ServiceStack;
 
-namespace NBot.Core.Brains
+namespace NBot.FileBrain
 {
     public class FileBrain : IBrain
     {

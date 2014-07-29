@@ -10,7 +10,7 @@
     <projectUrl>https://github.com/NBot/NBot</projectUrl>
     <iconUrl>https://avatars1.githubusercontent.com/u/5455259?s=140</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>File Brain for NBot</description>
+    <description>Azure Table Storage Brain for NBot</description>
     <releaseNotes>Summary of changes made in this release of the package.</releaseNotes>
     <copyright>Copyright 2014</copyright>
     <tags>NBot HuBot Bot chat</tags>
